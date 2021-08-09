@@ -90,12 +90,12 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `
-const LoginPasswordA=styled.a`
+const LoginPasswordA=styled.button`
 
 color: #2CB67D;
 `;
 
-const LoginRegistrar=styled.a`
+const LoginRegistrar=styled.button`
 color: #2CB67D;
 display: inline;
     text-decoration: none;`;
@@ -106,13 +106,13 @@ const url='http://localhost:4000/usuarios';
 const cookies= new Cookies();
 class AppLogin extends Component {
     state={form:{
-        email: '',
+        username: '',
         password: ''
     }
     
 }
 componentDidMount(){
-    if(cookies.get('username')){
+    if(cookies.get('email')){
         window.location.href="./home";
     }
 }
@@ -149,26 +149,39 @@ await axios.get(url, {params:{username:this.state.form.email, password:this.stat
     return (
         <>
         <GlobalStyle />
+      
       <LoginForm>
+       
         <LoginFlex>
+          
             <figure>
+                   
                     <img src={logologin} id="logo" alt="" />
+               
                 </figure>
             
             <ButtonLoginH1>Iniciar Sesión</ButtonLoginH1>
+        
         </LoginFlex>
-       <LoginButton onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="" srcSet="" /> <LoginH1G>Continuar con Google</LoginH1G></LoginButton>
+      
+       <LoginButton onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="icon" srcSet="" /> 
+       <LoginH1G>Continuar con Google</LoginH1G></LoginButton>
 
         <HrLogin />
         
-        <LoginLabel htmlFor="email"><LoginFlex>
-            <LoginLabelP>Correo Electrónico</LoginLabelP>
-            <LoginEmail type="email" name="email" id="email" placeholder="Ingrese su Correo Electrónico"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+        <LoginLabel htmlFor="username"><LoginFlex>
+           
+            <LoginLabelP>Nombre de Usuario</LoginLabelP>
+
+            <LoginEmail type="text" name="username" id="username" placeholder="Ingrese su Correo Electrónico"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+           
             <LoginLabelP>Contaseña</LoginLabelP>
+
             <LoginEmail type="password" name="password" onChange={this.handleChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
-            <LoginPasswordA id="contraseña" href="/">¿Se te olvidó tu contraseña?</LoginPasswordA><br />
+
+           <Link to="/home" id="contraseña"><LoginPasswordA>¿Se te olvidó tu contraseña?</LoginPasswordA></Link> <br />
             <br />
-            <p>¿Aún no tienes cuenta? <Link to="/registro"><LoginRegistrar  id="register">Inscribirse</LoginRegistrar></Link></p>
+            <p>¿Aún no tienes cuenta? <Link to="/registro" id="register"><LoginRegistrar>Inscribirse</LoginRegistrar></Link></p>
         </LoginFlex> </LoginLabel>
     </LoginForm>
         </>

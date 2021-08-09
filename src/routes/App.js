@@ -6,7 +6,7 @@ import Registro from '../components/login/Registro'
 import Home from '../components/Home'
 const App = () => {
     return (
-        <div>
+        
             <Router>
 
                 <Switch>
@@ -15,7 +15,7 @@ const App = () => {
                     <Route exact path="/home" component={Home} />
                 </Switch>
             </Router>
-        </div>
+        
     )
 }
 

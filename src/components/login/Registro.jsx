@@ -125,7 +125,7 @@ RegistrarUsario=async() =>{
         id:uuid,
         nombre: this.state.form.nombre,
         apellidos: this.state.form.apellidos,
-        email: this.state.form.email,
+        username: this.state.form.username,
         password: this.state.form.password
     }).then(response=>{
         if(response.length>0){
@@ -164,9 +164,9 @@ RegistrarUsario=async() =>{
                 <LoginEmail type="text" name="apellidos" id="apellido_paterno" placeholder="Apellidos"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
                  
             
-            <LoginLabel htmlFor="email"><LoginFlex>
+            <LoginLabel htmlFor="username"><LoginFlex>
                 <LoginLabelP>Correo Electrónico</LoginLabelP>
-                <LoginEmail type="email" name="email" id="username" placeholder="Ingrese su Correo Electrónico"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+                <LoginEmail type="email" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
                 <LoginLabelP>Contaseña</LoginLabelP>
                 <LoginEmail type="password" name="password" onChange={this.handleChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
                 <LoginButton onClick={()=>this.RegistrarUsario()}> <LoginH1G>Registrar</LoginH1G></LoginButton>
