@@ -48,7 +48,7 @@ color: #FFFFFE;
 }
 
 @media only screen and (max-width: 767px){
-    width:100%
+    width:40%
 }
 `;
 
@@ -173,25 +173,25 @@ const Animacion = ({ users }) => {
        
 
         <HrLogin />
-        <LoginLabel htmlFor="nombre">
+        <LoginLabel htmlFor="nombre"><LoginFlex>
             <LoginLabelP>Nombre</LoginLabelP>
-            <LoginEmail type="text" name="nombre" id="nombre" placeholder="Nombres"  onChange={handleInputChange}  required ></LoginEmail><br /><br />
+            <LoginEmail type="text" name="nombre" id="nombre" placeholder="Nombres"  onChange={handleInputChange}  required ></LoginEmail><br /><br /></LoginFlex>
 
-        <LoginLabel htmlFor="apellidos">
+        <LoginLabel htmlFor="apellidos"><LoginFlex>
             <LoginLabelP>Apellidos</LoginLabelP>
-            <LoginEmail type="text" name="apellidos" id="apellido_paterno" placeholder="Apellidos"  onChange={handleInputChange}  required ></LoginEmail><br /><br />
+            <LoginEmail type="text" name="apellidos" id="apellido_paterno" placeholder="Apellidos"  onChange={handleInputChange}  required ></LoginEmail><br /><br /> </LoginFlex>
              
         
         <LoginLabel htmlFor="username"><LoginFlex>
             <LoginLabelP>Nombre de Usuario </LoginLabelP>
-            <LoginEmail type="text" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={handleInputChange}  required ></LoginEmail><br /><br />
-            <LoginLabelP>Contaseña</LoginLabelP>
+            <LoginEmail type="text" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={handleInputChange}  required ></LoginEmail><br /><br /> </LoginFlex>
+            <LoginFlex><LoginLabelP>Contaseña</LoginLabelP>
             <LoginEmail type="password" name="password" onChange={handleInputChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
-            <LoginButton onClick={()=>AddUser()}> <LoginH1G>Registrar</LoginH1G></LoginButton>
-            <LoginRegistrar href="/" id="register">Regresar</LoginRegistrar>
+            <LoginButton onClick={()=>AddUser()}> <LoginH1G>Registrar</LoginH1G></LoginButton><br />
+            <LoginRegistrar href="/" id="register">Regresar</LoginRegistrar></LoginFlex> 
             <br />
             
-        </LoginFlex> </LoginLabel></LoginLabel></LoginLabel>
+        </LoginLabel></LoginLabel></LoginLabel>
     </LoginForm>
         </>
     )
