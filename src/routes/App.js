@@ -1,7 +1,7 @@
 
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import AppLogin from '../components/AppLogin.jsx'
+import AppLogin from '../components/login/AppLogin'
 
 
 import EditUsers from '../components/login/EditUser.jsx'

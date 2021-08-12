@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import uuid from 'react-uuid'
 import Swal from 'sweetalert2'
-
+import '../../styles/Styles.css'
 
 import logologin from '../img/logologin.svg'
 const GlobalStyle = createGlobalStyle`
@@ -98,7 +98,7 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `;
-const url='http://localhost:4000/data';
+const url='https://apidaily.herokuapp.com/data';
 
 const Animacion = ({ users }) => {
 
@@ -127,7 +127,7 @@ const Animacion = ({ users }) => {
 
 
         try {
-            const resultado = await axios.post(`http://localhost:4000/data`, {
+            const resultado = await axios.post(`https://apidaily.herokuapp.com/data`, {
                 id:uuid,
                 nombre: nombre,
                 apellidos:apellidos,

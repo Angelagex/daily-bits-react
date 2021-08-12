@@ -4,8 +4,8 @@ import {  createGlobalStyle  } from 'styled-components';
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
-import logologin from './img/logologin.svg'
-
+import logologin from '../img/logologin.svg'
+import '../../styles/Styles.css'
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #16161A;
@@ -103,7 +103,7 @@ text-decoration: none;`
     ;
 
 
-const url='http://localhost:4000/data';
+const url='https://apidaily.herokuapp.com/data';
 
 
 

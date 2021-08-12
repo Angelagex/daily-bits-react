@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import styled ,{createGlobalStyle} from 'styled-components';
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom'
 import AddUser from './AddUser';
 import Cookies from 'universal-cookie';
+import '../../styles/Styles.css'
 
-import logologin from '../img/logologin.svg'
+
+
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #16161A;
@@ -24,49 +27,55 @@ const LoginFlex =styled.div`
 
  
 `;
-const TableIni=styled.table`
-
-`
-
-
-const ButtonLoginH1=styled.h1`
-
-    margin-top: 5vh;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 39px;
-      
-    
-    `;
-
-const HrLogin=styled.hr`
-border: 1px solid #94A1B2;
-margin-top: 2vh;`;
 
 
 
 
-const LoginLabelP=styled.p`
-align-self: flex-start;
-    text-indent: 4vw;`;
-const LoginEmail=styled.input` 
-padding: 12px 16px;
-border-radius: 4px;
-position: static;
 
-font-size: 16px;
-line-height: 24px;
-@media only screen and (max-width: 767px){
-    width:90%
-}`;
-
-const LoginH1G=styled.h2`
-font-size: 16px;
-text-align:center;
-margin-left:6px;
-`;
 const LoginButton=styled.button`
+background: #EF4565;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 6px 18px;
+
+position: static;
+border-radius: 4px;
+margin-top: 1vh;
+text-decoration: none;
+color: #FFFFFE;
+&:hover{
+    background: #c2324c;
+}
+
+@media only screen and (max-width: 767px){
+    width: 20%
+}
+`;
+const LoginButton1=styled.button`
+background: #EF4565;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 6px 18px;
+
+position: relative;
+
+border-radius: 4px;
+margin-top: 1vh;
+text-decoration: none;
+color: #FFFFFE;
+&:hover{
+    background: #c2324c;
+}
+
+@media only screen and (max-width: 767px){
+    width: 100%
+}
+`;
+const LoginButton2=styled.button`
 background: #EF4565;
 display: flex;
 flex-direction: row;
@@ -84,9 +93,44 @@ color: #FFFFFE;
 }
 
 @media only screen and (max-width: 767px){
-    width:100%
+    width: 100%
 }
 `;
+const Table=styled.table`
+	text-align: left;
+border-collapse: collapse;
+width: 100%;`
+	
+
+
+
+const Th=styled.th`
+padding: 20px;
+
+  &:hover
+  	background-color: #369681;
+	color: white;
+`;
+
+const Td=styled.td`
+padding: 20px;
+&:hover
+  	background-color: #369681;
+	color: white;
+`;
+
+const Thead=styled.thead`
+text-align:right;
+border-bottom: solid 5px #0F362D;
+color: white;
+margin-left:10px;
+`;
+	
+
+
+
+
+
 const cookies= new Cookies();
 const Inicio = (props) => {
 
@@ -99,7 +143,7 @@ const Inicio = (props) => {
   }, [])
 
   const userInfo = async() => {
-  const url = `http://localhost:4000/data`
+  const url = `https://apidaily.herokuapp.com/data`
   const resp = await axios.get(url)
   const data = await resp.data
   console.log(data)
@@ -124,7 +168,7 @@ const eliminarUser= id => {
     if (result.value) {
       try {
 
-        const url = `http://localhost:4000/data/${id}`;
+        const url = `https://apidaily.herokuapp.com/data/${id}`;
         const resultado = await axios.delete(url);
         if (resultado.status === 200) {
           Swal.fire(
@@ -163,38 +207,46 @@ const cerrarSesion=()=>{
 return (
   <>
   <GlobalStyle />
-  <LoginButton onClick={()=>cerrarSesion()} >Cerrar Sesion</LoginButton>
+  <LoginButton2 onClick={()=>cerrarSesion()} >Cerrar Sesion</LoginButton2>
     {
       user.map(users => {
         return (
           <LoginFlex key={users.id}>
+            <Table>
             
-            <table>
-              <tr>
-                <td>Nombres: {users.nombre}</td></tr><br />
-               <tr> <td>Apellidos: {users.apellidos}</td></tr><br />
-               <tr><td>Usuario: {users.username}</td>
-                
-                
-              </tr>
-            </table>
-            <Link to="" >
+            
 
-              
-               
-            </Link>
-           
+      <Thead>Datos del Usuario</Thead>
+			<tr><Th>Nombres: </Th>
+				<Td>{users.nombre}</Td>
+			</tr>
+			<tr><Th>Apellidos: </Th> 
+				<Td>{users.apellidos}</Td>
+			</tr>
+      <tr><Th>Nombre de Usuario: </Th>
+				<Td>{users.username}</Td>
+			</tr>
+      
+      
+             
+            </Table>
+            
 
-              <LoginButton 
+            <LoginButton 
                 onClick={() => handleDelete(users.id)}>
                 eliminar
               </LoginButton> 
               
+               
+           
+           
+
+              
 
               <Link
-                to={`/edit/${users.id}`}
-                className="btn btn-success mr-2"
-              ><LoginButton w={6} h={6} color="green.500" >editar </LoginButton></Link>
+                to={`/edit/${users.id}`} 
+                
+              ><LoginButton1  >editar </LoginButton1></Link>
 
             
           </LoginFlex>
