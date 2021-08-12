@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {  createGlobalStyle  } from 'styled-components';
 import axios from 'axios';
 import uuid from 'react-uuid'
-
+import Swal from 'sweetalert2'
 
 
 import logologin from '../img/logologin.svg'
@@ -85,13 +85,19 @@ line-height: 24px;
 @media only screen and (max-width: 767px){
     width:90%
 }`;
+const LoginRegistrar=styled.a`
+color: #2CB67D;
+display: inline;
+box-shadow: none    
+text-decoration: none;`
+    ;
 
 const LoginH1G=styled.h2`
 font-size: 16px;
 text-align:center;
 margin-left:6px;
-`
-const url='http://localhost:4000/usuarios';
+`;
+const url='http://localhost:4000/data';
 
 
 export default class Registro extends Component {
@@ -100,17 +106,17 @@ export default class Registro extends Component {
             this.state={
                 data:[],
                 form:{
-                    id:'',
-                    nombres:'',
+                    
+                    nombre:'',
                     apellidos:'',
                     username:'',
                     password:''
-
+                         
                 }
             }
 
         }
-    handleChange = async e => {
+    handleChangeR = async e => {
         await this.setState({
             form: {
                 ...this.state.form,
@@ -120,7 +126,7 @@ export default class Registro extends Component {
         console.log(this.state.form) 
     }
     
-RegistrarUsario=async() =>{
+RegistrarUsuario=async() =>{
     await axios.post(url,{
         id:uuid,
         nombre: this.state.form.nombre,
@@ -128,23 +134,41 @@ RegistrarUsario=async() =>{
         username: this.state.form.username,
         password: this.state.form.password
     }).then(response=>{
-        if(response.length>0){
-        alert('usuario registrado');}
-         else{
-            alert('no se pudo registrar el usuario, intentelo nuevamente')
+        if(response.length>0 && response.status === 200){
+            
+            Swal.fire(
+                    'Usuario Creado',
+                    'El usuario se Creo correctamente',
+                    'success'
+                )
+            
+            }else {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error, vuelve a intentarlo'
+                })
         }
-
+        
+        
     }).catch(error=>{
         
         console.log(error.message);
+        Swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'Hubo un error, vuelve a intentarlo'
+            })
     })
 }
-
+handlePrevent= e=>{
+    e.preventDefault();
+}
     render() {
         return (
             <>
             <GlobalStyle />
-          <LoginForm>
+          <LoginForm onSubmit={this.handlePrevent}>
             <LoginFlex>
                 <figure>
                         <img src={logologin} id="logo" alt="" />
@@ -152,24 +176,25 @@ RegistrarUsario=async() =>{
                 
                 <ButtonLoginH1>Registro</ButtonLoginH1>
             </LoginFlex>
-           <LoginButton onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="" srcSet="" /> <LoginH1G>Continuar con Google</LoginH1G></LoginButton>
+           
     
             <HrLogin />
             <LoginLabel htmlFor="nombre">
                 <LoginLabelP>Nombre</LoginLabelP>
-                <LoginEmail type="text" name="nombre" id="nombre" placeholder="Nombres"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+                <LoginEmail type="text" name="nombre" id="nombre" placeholder="Nombres"  onChange={this.handleChangeR}  required ></LoginEmail><br /><br />
 
             <LoginLabel htmlFor="apellidos">
                 <LoginLabelP>Apellidos</LoginLabelP>
-                <LoginEmail type="text" name="apellidos" id="apellido_paterno" placeholder="Apellidos"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+                <LoginEmail type="text" name="apellidos" id="apellido_paterno" placeholder="Apellidos"  onChange={this.handleChangeR}  required ></LoginEmail><br /><br />
                  
             
             <LoginLabel htmlFor="username"><LoginFlex>
-                <LoginLabelP>Correo Electrónico</LoginLabelP>
-                <LoginEmail type="email" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+                <LoginLabelP>Nombre de Usuario </LoginLabelP>
+                <LoginEmail type="text" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={this.handleChangeR}  required ></LoginEmail><br /><br />
                 <LoginLabelP>Contaseña</LoginLabelP>
-                <LoginEmail type="password" name="password" onChange={this.handleChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
-                <LoginButton onClick={()=>this.RegistrarUsario()}> <LoginH1G>Registrar</LoginH1G></LoginButton>
+                <LoginEmail type="password" name="password" onChange={this.handleChangeR} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
+                <LoginButton onClick={()=>this.RegistrarUsuario()}> <LoginH1G>Registrar</LoginH1G></LoginButton>
+                <LoginRegistrar href="/" id="register">Regresar</LoginRegistrar>
                 <br />
                 
             </LoginFlex> </LoginLabel></LoginLabel></LoginLabel>

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import {  createGlobalStyle  } from 'styled-components';
 import axios from 'axios'
 import Cookies from 'universal-cookie'
-
+import Swal from 'sweetalert2'
 import logologin from './img/logologin.svg'
-import {Link} from 'react-router-dom'
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #16161A;
@@ -90,21 +90,27 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `
-const LoginPasswordA=styled.button`
-
+const LoginPasswordA=styled.a`
+box-shadow: none
 color: #2CB67D;
 `;
 
-const LoginRegistrar=styled.button`
+const LoginRegistrar=styled.a`
 color: #2CB67D;
 display: inline;
-    text-decoration: none;`;
+box-shadow: none    
+text-decoration: none;`
+    ;
 
 
-const url='http://localhost:4000/usuarios';
+const url='http://localhost:4000/data';
 
-const cookies= new Cookies();
-class AppLogin extends Component {
+
+
+
+
+    const cookies= new Cookies();
+    class AppLogin extends Component {
     state={form:{
         username: '',
         password: ''
@@ -112,19 +118,25 @@ class AppLogin extends Component {
     
 }
 componentDidMount(){
-    if(cookies.get('email')){
-        window.location.href="./home";
+    if(cookies.get('username')){
+        window.location.href="./usuarios";
     }
 }
 handleChange= async e=>{
    await this.setState({
         form:{
             ...this.state.form, [e.target.name]:e.target.value
-
+            
         }
-    })}
+     
+    })};
+  
+handlePrevent= e=>{
+    e.preventDefault();
+}
+  
  Login=async()=>{
-await axios.get(url, {params:{username:this.state.form.email, password:this.state.form.password}}).then( response=>{
+await axios.get(url, {params:{username:this.state.form.username, password:this.state.form.password}}).then( response=>{ 
     return  response.data;}).then(response=>{
         if(response.length>0){
             let respuesta=response[0];
@@ -132,25 +144,27 @@ await axios.get(url, {params:{username:this.state.form.email, password:this.stat
             cookies.set('nombre',respuesta.nombre,{path:"/"});
             cookies.set('apellidos',respuesta.apellidos,{path:"/"});
             cookies.set('username',respuesta.username,{path:"/"});
-            alert(`Bienvenido ${respuesta.nombre}`)
-            window.location.href="./home";
+            Swal.fire(
+                'Has iniciado sesion',
+                `Bienvenido ${respuesta.nombre}`,
+                'success'
+            )
+            window.location.href="./usuarios";
+            
         }else{
             alert('El usuario o la contraseña es incorrecta');
         }
-    })
-
- 
- .catch(error=>{
+    }).catch(error=>{
      console.log(error);
  }) 
-
+console.log(this.state.value)
 }
-   render(){
+render(){
     return (
         <>
         <GlobalStyle />
       
-      <LoginForm>
+      <LoginForm onSubmit={this.handlePrevent}>
        
         <LoginFlex>
           
@@ -164,7 +178,7 @@ await axios.get(url, {params:{username:this.state.form.email, password:this.stat
         
         </LoginFlex>
       
-       <LoginButton onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="icon" srcSet="" /> 
+       <LoginButton  onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="icon" srcSet="" /> 
        <LoginH1G>Continuar con Google</LoginH1G></LoginButton>
 
         <HrLogin />
@@ -173,19 +187,21 @@ await axios.get(url, {params:{username:this.state.form.email, password:this.stat
            
             <LoginLabelP>Nombre de Usuario</LoginLabelP>
 
-            <LoginEmail type="text" name="username" id="username" placeholder="Ingrese su Correo Electrónico"  onChange={this.handleChange}  required ></LoginEmail><br /><br />
+            <LoginEmail type="text" name="username" id="username" placeholder="Ingrese su Correo Electrónico" value={this.state.username}  onChange={this.handleChange}  required ></LoginEmail><br /><br />
            
             <LoginLabelP>Contaseña</LoginLabelP>
 
-            <LoginEmail type="password" name="password" onChange={this.handleChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
+            <LoginEmail type="password" name="password" onChange={this.handleChange} id="password" value={this.state.password} placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
 
-           <Link to="/home" id="contraseña"><LoginPasswordA>¿Se te olvidó tu contraseña?</LoginPasswordA></Link> <br />
+           <LoginPasswordA href="/home" id="contraseña">¿Se te olvidó tu contraseña?</LoginPasswordA> <br />
             <br />
-            <p>¿Aún no tienes cuenta? <Link to="/registro" id="register"><LoginRegistrar>Inscribirse</LoginRegistrar></Link></p>
+            <p>¿Aún no tienes cuenta? <LoginRegistrar href="/registro" id="register">Inscribirse</LoginRegistrar></p>
         </LoginFlex> </LoginLabel>
     </LoginForm>
         </>
     )
 }
-}
-export default AppLogin
+    }
+export default AppLogin;
+
+   
