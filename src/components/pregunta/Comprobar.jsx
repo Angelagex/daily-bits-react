@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import '../../styles/Styles.css'
 
@@ -8,8 +8,8 @@ position:absolute;
   align-items: center;
  justify-content: space-between;
  align-content: center;
- 
- bottom: 95px;
+ transform: translateX(60px);
+ bottom: 25px;
  
 `
 
@@ -17,14 +17,14 @@ position:absolute;
 const Button = styled.button`
 
 
-position:absolute;
-width: 328px;
-height: 50px; 
-color: var(--color-white);
-bottom: 16px;
-margin-top: 20px;
-background: #D4CAF3;
-border-radius: 16px;
+  position:absolute;
+  width: 328px;
+  height: 50px; 
+  color: var(--color-white);
+  bottom: 16px;
+  margin-top: 20px;
+  background: #D4CAF3;
+  border-radius: 16px;
 
 `
 
@@ -34,11 +34,11 @@ border-radius: 16px;
 const Comprobar = () => {
 
       return (
-          <>
+         
             <Contenedor>
                 <Button>COMPROBAR</Button>
             </Contenedor>
-          </>
+          
       )
   
 }

@@ -1,8 +1,9 @@
 import React from 'react';
-import NavBar from '../../components/pregunta/SignosVitales';
+import SignosVitales from '../../components/pregunta/SignosVitales';
 import Comprobar from '../../components/pregunta/Comprobar';
 import styled from 'styled-components';
-import '../../styles/Styles.css'
+import '../../styles/Styles.css';
+import PreguntaSelec from '../../components/pregunta/PreguntaSelec'
 
 
 
@@ -13,15 +14,14 @@ font-family: var(--font-family);
 display: flex;
 flex-direction:column;
 align-items: center;
-justify-content: center;
+
 `
 const Div = styled.div`
-paddign-top: 15px;
 display: flex;
 flex-direction: row;
-width: 50%;
-height: 25px;
-justify-content: space-between;`
+height: 20px;
+justify-content: space-between;
+`
 
 
 
@@ -29,9 +29,10 @@ const App = () => {
     return (
         <Body>
             <Div>
-            <NavBar/>,
-            <Comprobar/>
+            <SignosVitales/><Comprobar/>
             </Div>
+            <PreguntaSelec/>
+            
         </Body>
     );
 }
