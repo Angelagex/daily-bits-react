@@ -71,6 +71,7 @@ const Container = styled.label`
 
 export default class PreguntaSelec extends Component {
     render() {
+        
         return (
             <ContenedorPrincipal>
                 <Pregunta>

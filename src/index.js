@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/pregunta/Pregunta';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import Home from './containers/home/Home';
+import '../src/styles/Styles.css'
+import App from './routes/App';
 
 ReactDOM.render(
     <App />,
