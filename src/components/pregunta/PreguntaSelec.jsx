@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import '../../styles/Styles.css'
+import '../../styles/Styles.css';
+import ThemeContext from "../../Context/theme";
 
 const ContenedorPrincipal = styled.div`
 
@@ -69,11 +70,11 @@ const Container = styled.label`
 
 
 
-export default class PreguntaSelec extends Component {
-    render() {
-        
+export default function PreguntaSelec()  {
+    
+        const theme = useContext(ThemeContext);
         return (
-            <ContenedorPrincipal>
+            <ContenedorPrincipal style={theme}>
                 <Pregunta>
                     <Avatar src="https://i.ibb.co/Wcx3y78/avatar-1.png" alt="calcelar" border="0" />
                     <PreguntaTexto>Prueba pregunta</PreguntaTexto>
@@ -97,7 +98,7 @@ export default class PreguntaSelec extends Component {
                     </Container>
                 </Preguntas>
             </ContenedorPrincipal>
-        )
-    }
+        );
+    
 }
 
