@@ -4,6 +4,7 @@ import Metrics from "../containers/metrics/Metrics"
 import Pregunta from "../containers/pregunta/Pregunta"
 import Perfil from "../containers/profile/Perfil"
 import Registro from "../containers/registro/Regsitro"
+import Usuarios from "../components/login/MostrarUser"
 
 
 const routes = {
@@ -27,6 +28,11 @@ const routes = {
         path: "/profile",
         name: "profile",
         component: Perfil
+    },
+    {
+        path: "/usuarios",
+        name: "usuarios",
+        component: Usuarios
     },
   ],
   public: [

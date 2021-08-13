@@ -188,7 +188,7 @@ const Animacion = ({ users }) => {
             <LoginFlex><LoginLabelP>Contaseña</LoginLabelP>
             <LoginEmail type="password" name="password" onChange={handleInputChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
             <LoginButton onClick={()=>AddUser()}> <LoginH1G>Registrar</LoginH1G></LoginButton><br />
-            <LoginRegistrar href="/" id="register">Regresar</LoginRegistrar></LoginFlex> 
+            <LoginRegistrar href="/login" id="register">Regresar</LoginRegistrar></LoginFlex> 
             <br />
             
         </LoginLabel></LoginLabel></LoginLabel>

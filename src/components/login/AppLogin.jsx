@@ -163,6 +163,33 @@ await axios.get(url, {params:{username:this.state.form.username, password:this.s
  }) 
 console.log(this.state.value)
 }
+LoginUsuarios=async()=>{
+    await axios.get(url, {params:{username:this.state.form.username, password:this.state.form.password}}).then( response=>{ 
+        return  response.data;}).then(response=>{
+            if(response.length>0){
+                let respuesta=response[0];
+                cookies.set('id',respuesta.id,{path:"/"});
+                cookies.set('nombre',respuesta.nombre,{path:"/"});
+                cookies.set('apellidos',respuesta.apellidos,{path:"/"});
+                cookies.set('username',respuesta.username,{path:"/"});
+                
+                localStorage.setItem("isAuth", "true")
+                Swal.fire(
+                    'Has iniciado sesion',
+                    `Bienvenido ${respuesta.nombre}`,
+                    'success'
+                )
+                localStorage.setItem("isAuth", "si")
+                window.location.href="./usuarios";
+                
+            }else{
+                alert('El usuario o la contraseña es incorrecta');
+            }
+        }).catch(error=>{
+         console.log(error);
+     }) 
+    console.log(this.state.value)
+    }
 render(){
     return (
         <>
@@ -184,6 +211,8 @@ render(){
       
        <LoginButton  onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="icon" srcSet="" /> 
        <LoginH1G>Continuar con Google</LoginH1G></LoginButton>
+       <LoginButton  onClick={()=>this.LoginUsuarios()}>
+       <LoginH1G>Ver Usuarios</LoginH1G></LoginButton>
 
         <HrLogin />
         

@@ -132,7 +132,7 @@ margin-left:10px;
 
 
 const cookies= new Cookies();
-const Inicio = (props) => {
+const Usuarios = (props) => {
 
   const history = useHistory()
   const [user, setUser] = useState([])
@@ -258,4 +258,4 @@ return (
 )
 }
 
-export default Inicio
+export default Usuarios
