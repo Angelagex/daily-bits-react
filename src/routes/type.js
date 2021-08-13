@@ -6,7 +6,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem("isAuth") === "true" ? (
+        localStorage.getItem("isAuth") === "si" ? (
           <Component {...props} />
         ) : (
           <>

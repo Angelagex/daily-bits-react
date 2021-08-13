@@ -1,5 +1,6 @@
 import React from 'react';
-import AppLogin from '../../components/login/AppLogin'
+import AppLogin from '../../components/login/AppLogin';
+import '../../styles/Styles.css'
 
 const Login = () => {
     return (

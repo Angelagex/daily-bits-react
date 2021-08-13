@@ -152,7 +152,8 @@ await axios.get(url, {params:{username:this.state.form.username, password:this.s
                 `Bienvenido ${respuesta.nombre}`,
                 'success'
             )
-            window.location.href="./usuarios";
+            localStorage.setItem("isAuth", "si")
+            window.location.href="./";
             
         }else{
             alert('El usuario o la contraseña es incorrecta');
