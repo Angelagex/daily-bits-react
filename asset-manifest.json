@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/daily-bits-react/static/css/main.ec64d3ee.chunk.css",
+    "main.js": "/daily-bits-react/static/js/main.ecf11eba.chunk.js",
+    "main.js.map": "/daily-bits-react/static/js/main.ecf11eba.chunk.js.map",
+    "runtime-main.js": "/daily-bits-react/static/js/runtime-main.6530d677.js",
+    "runtime-main.js.map": "/daily-bits-react/static/js/runtime-main.6530d677.js.map",
+    "static/js/2.a1a91b56.chunk.js": "/daily-bits-react/static/js/2.a1a91b56.chunk.js",
+    "static/js/2.a1a91b56.chunk.js.map": "/daily-bits-react/static/js/2.a1a91b56.chunk.js.map",
+    "index.html": "/daily-bits-react/index.html",
+    "static/css/main.ec64d3ee.chunk.css.map": "/daily-bits-react/static/css/main.ec64d3ee.chunk.css.map",
+    "static/js/2.a1a91b56.chunk.js.LICENSE.txt": "/daily-bits-react/static/js/2.a1a91b56.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6530d677.js",
+    "static/js/2.a1a91b56.chunk.js",
+    "static/css/main.ec64d3ee.chunk.css",
+    "static/js/main.ecf11eba.chunk.js"
+  ]
+}
