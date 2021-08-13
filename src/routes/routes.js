@@ -6,6 +6,7 @@ import Perfil from "../containers/profile/Perfil"
 import Registro from "../containers/registro/Regsitro"
 
 
+
 const routes = {
   private: [
     {
@@ -28,6 +29,7 @@ const routes = {
         name: "profile",
         component: Perfil
     },
+   
   ],
   public: [
     {
