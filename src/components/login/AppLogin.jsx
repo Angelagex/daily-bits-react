@@ -91,14 +91,14 @@ text-align:center;
 margin-left:6px;
 `
 const LoginPasswordA=styled.a`
-box-shadow: none
+box-shadow: none;
 color: #2CB67D;
 `;
 
 const LoginRegistrar=styled.a`
 color: #2CB67D;
 display: inline;
-box-shadow: none    
+box-shadow: none;    
 text-decoration: none;`
     ;
 
@@ -119,7 +119,8 @@ const url='https://apidaily.herokuapp.com/data';
 }
 componentDidMount(){
     if(cookies.get('username')){
-        window.location.href="./usuarios";
+        localStorage.setItem("isAuth", "true")
+        window.location.href="./";
     }
 }
 handleChange= async e=>{

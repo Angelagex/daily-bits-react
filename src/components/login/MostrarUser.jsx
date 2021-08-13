@@ -107,16 +107,16 @@ width: 100%;`
 const Th=styled.th`
 padding: 20px;
 
-  &:hover
+  &:hover{
   	background-color: #369681;
-	color: white;
+	color: white;}
 `;
 
 const Td=styled.td`
 padding: 20px;
-&:hover
+&:hover{
   	background-color: #369681;
-	color: white;
+	color: white;}
 `;
 
 const Thead=styled.thead`

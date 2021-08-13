@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Animacion from '../../components/login/AddUser'
 
 const Registro = () => {
     return (
         <div>
-            <h1>Registro</h1>
+            <Animacion/>
         </div>
     )
 }

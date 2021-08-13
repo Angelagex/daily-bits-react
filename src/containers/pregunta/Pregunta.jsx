@@ -4,6 +4,7 @@ import Comprobar from '../../components/pregunta/Comprobar';
 import styled from 'styled-components';
 import '../../styles/Styles.css';
 import PreguntaSelec from '../../components/pregunta/PreguntaSelec'
+import ThemeContext, { themes } from "../../Context/theme";
 
 
 
@@ -25,16 +26,17 @@ justify-content: space-between;
 
 
 
-const App = () => {
+const Pregunta = () => {
     return (
+        <ThemeContext.Provider value={themes}>
         <Body>
             <Div>
             <SignosVitales/><Comprobar/>
             </Div>
             <PreguntaSelec/>
-            
         </Body>
+        </ThemeContext.Provider>
     );
 }
 
-export default App;
+export default Pregunta;
