@@ -15,8 +15,8 @@ const Navbar = () => {
     position: absolute;
     width: 100%;
     height: 69px;
-    left: 0px;
-    bottom: 0px;
+    left: 0;
+    bottom: 0;
     margin-top: 4vh;
     `;
 
