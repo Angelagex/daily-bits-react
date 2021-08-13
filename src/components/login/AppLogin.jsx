@@ -119,8 +119,8 @@ const url='https://apidaily.herokuapp.com/data';
 }
 componentDidMount(){
     if(cookies.get('username')){
-        localStorage.setItem("isAuth", "true")
         window.location.href="./";
+        
     }
 }
 handleChange= async e=>{
@@ -145,6 +145,8 @@ await axios.get(url, {params:{username:this.state.form.username, password:this.s
             cookies.set('nombre',respuesta.nombre,{path:"/"});
             cookies.set('apellidos',respuesta.apellidos,{path:"/"});
             cookies.set('username',respuesta.username,{path:"/"});
+            
+            localStorage.setItem("isAuth", "true")
             Swal.fire(
                 'Has iniciado sesion',
                 `Bienvenido ${respuesta.nombre}`,

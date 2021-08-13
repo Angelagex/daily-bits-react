@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const Navbar = styled.div`
+    position: fixed;
     background: #232E35;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 
-    position: absolute;
     width: 100%;
     height: 69px;
     left: 0px;

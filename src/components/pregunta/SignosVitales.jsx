@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import '../../styles/Styles.css'
+import '../../styles/Styles.css';
+import { Link } from 'react-router-dom';
 
 
 
@@ -13,7 +14,7 @@ width: 100%;
 height: 13px;
 justify-content: space-between;
 `
-const ContCancel = styled.p`
+const ContCancel = styled(Link)`
 
 margin: 15px;
 color: var(--color-white);
@@ -36,7 +37,7 @@ const SignosVitales = () => {
 
       return (
           <>
-          <ContCancel>
+          <ContCancel to="/">
               <img src="https://i.ibb.co/X3wnbvp/calcelar.png" alt="calcelar" border="0" />
             </ContCancel>
             <Barra>

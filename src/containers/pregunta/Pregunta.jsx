@@ -2,7 +2,6 @@ import React from 'react';
 import SignosVitales from '../../components/pregunta/SignosVitales';
 import Comprobar from '../../components/pregunta/Comprobar';
 import styled from 'styled-components';
-import '../../styles/Styles.css';
 import PreguntaSelec from '../../components/pregunta/PreguntaSelec'
 import ThemeContext, { themes } from "../../Context/theme";
 
