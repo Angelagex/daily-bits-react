@@ -89,7 +89,7 @@ line-height: 24px;
 const LoginRegistrar=styled.a`
 color: #2CB67D;
 display: inline;
-box-shadow: none    
+box-shadow: none;    
 text-decoration: none;`
     ;
 
