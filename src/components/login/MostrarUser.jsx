@@ -4,8 +4,10 @@ import axios from 'axios';
 import styled ,{createGlobalStyle} from 'styled-components';
 import Swal from 'sweetalert2'
 import { useHistory } from 'react-router-dom'
-import AddUser from './AddUser';
+import AddUsers from './AddUser';
 import Cookies from 'universal-cookie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenSquare, faTrash,faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/Styles.css'
 
 
@@ -97,36 +99,45 @@ color: #FFFFFE;
 }
 `;
 const Table=styled.table`
-	text-align: left;
+
 border-collapse: collapse;
 width: 100%;`
 	
 
-
+const Image=styled.img`
+width:100px;
+`
 
 const Th=styled.th`
-padding: 20px;
-
-  &:hover{
-  	background-color: #369681;
-	color: white;}
+padding:15px;
+width: 25%;
+text-align: left;
+vertical-align: top;
 `;
 
 const Td=styled.td`
-padding: 20px;
-&:hover{
-  	background-color: #369681;
-	color: white;}
+
+
+  width: 25%;
+  text-align: left;
+  
 `;
 
 const Thead=styled.thead`
-text-align:right;
+
+
 border-bottom: solid 5px #0F362D;
 color: white;
-margin-left:10px;
+
 `;
 	
+const Tr=styled.tr`
 
+text-align:left;
+
+color: white;
+width:50%;
+`;
 
 
 
@@ -153,7 +164,7 @@ const Inicio = (props) => {
 const eliminarUser= id => {
   console.log('eliminando', id);
 
-  // TODO: Eliminar los registros
+  
   Swal.fire({
     title: '¿Estas Seguro?',
     text: "Una vez eliminado un usuario no podras recuperarlo",
@@ -201,55 +212,66 @@ const cerrarSesion=()=>{
   cookies.remove('nombre', {path: "/"});
   cookies.remove('apellidos', {path: "/"});
   cookies.remove('username', {path: "/"});
-  window.location.href="./";
+  cookies.remove('imageUrl',{path:"/"});
+  window.location.href="./login";
 }
 
 return (
   <>
   <GlobalStyle />
-  <LoginButton2 onClick={()=>cerrarSesion()} >Cerrar Sesion</LoginButton2>
+  <FontAwesomeIcon icon={faSignOutAlt} onClick={()=>cerrarSesion()}  style={{ fontSize:"30px",color:"white"}}></FontAwesomeIcon>
     {
       user.map(users => {
         return (
-          <LoginFlex key={users.id}>
-            <Table>
+          <>
+            <Table key={users.id}>
             
             
 
       <Thead>Datos del Usuario</Thead>
-			<tr><Th>Nombres: </Th>
-				<Td>{users.nombre}</Td>
-			</tr>
-			<tr><Th>Apellidos: </Th> 
-				<Td>{users.apellidos}</Td>
-			</tr>
-      <tr><Th>Nombre de Usuario: </Th>
-				<Td>{users.username}</Td>
-			</tr>
-      
-      
-             
-            </Table>
-            
-
-            <LoginButton 
+      <tr style={{position:"absolute", marginLeft:"140px",fontSize:"30px",color:"white"}}>  <FontAwesomeIcon icon={faTrash} 
                 onClick={() => handleDelete(users.id)}>
-                eliminar
-              </LoginButton> 
-              
-               
-           
-           
-
-              
-
-              <Link
+                
+              </FontAwesomeIcon> 
+              <Link style={{textDecoration:"none", fontSize:"30px",color:"white",marginLeft:"5px", }}
                 to={`/edit/${users.id}`} 
                 
-              ><LoginButton1  >editar </LoginButton1></Link>
+              ><FontAwesomeIcon icon={faPenSquare}></FontAwesomeIcon> </Link>
+               </tr><br />
+			<Tr><Th>Nombres: </Th>
+				<Td>{users.nombre}</Td>
+			</Tr>
+			<Tr><Th>Apellidos: </Th> 
+				<Td>{users.apellidos}</Td>
+			</Tr>
+      <Tr><Th>Nombre de Usuario: </Th>
+				<Td>{users.username}</Td>
+			</Tr>
+      <Tr><Th>Foto de Perfil: </Th>
+				<Td><Image
+                    
+                    src={users.imageUrl}
+                    
+                    
+                  />
+             
+            </Td>
+			</Tr>
+      <br />
+      <br />
+      
+            
+      </Table>
+          
+           </>
+           
+
+              
+
+          
 
             
-          </LoginFlex>
+          
         )
       })
     }

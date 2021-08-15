@@ -1,7 +1,16 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import styled from 'styled-components';
+import AddUsers from '../login/AddUser';
+import MostrarUser from '../login/MostrarUser';
 
-const Usuario = () => {
+import Cookies from 'universal-cookie';
+import axios from 'axios';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import '../../styles/Styles.css'
+const cookies= new Cookies();
+const Usuario = (props) => {
 
     const Container = styled.div`
         padding-top: 5vw;
@@ -38,7 +47,13 @@ const Usuario = () => {
         padding-right: 13vw;
         margin-top: 2vh;
     `
-
+const Img =styled.img`
+ width:100px;
+    height:100px;
+    border-radius:160px;
+    
+`
+;
     const Flex2 = styled.div`
         display: flex;
         flex-direction: column;
@@ -62,6 +77,7 @@ const Usuario = () => {
             line-height: 24px;
             margin-top: 2vh;
             margin-bottom: 0;
+            color:white;
         }
 
         &>p {
@@ -71,6 +87,7 @@ const Usuario = () => {
             font-size: 14px;
             line-height: 24px;
             margin-top: 0.5vh;
+            color:white;
         }
 
         &>a {
@@ -83,6 +100,38 @@ const Usuario = () => {
             color: #EF4565;
         }
     `
+    
+  
+  const [user, setUser] = useState([])
+
+  useEffect(() => {
+    userInfo()
+      .then(usuario => setUser(usuario))
+  }, [])
+
+  const userInfo = async() => {
+  const url = `https://apidaily.herokuapp.com/data`
+  const resp = await axios.get(url)
+  const data = await resp.data
+  console.log(data)
+
+  
+
+  return data
+}
+console.log(cookies.get('id',{path:"/"}));
+console.log(cookies.get('nombre',{path:"/"}));
+console.log(cookies.get('apellidos',{path:"/"}));
+console.log(cookies.get('username',{path:"/"}));
+console.log(cookies.get('imageUrl',{path:"/"}));
+const cerrarSesion=()=>{
+    cookies.remove('id', {path: "/"});
+    cookies.remove('nombre', {path: "/"});
+    cookies.remove('apellidos', {path: "/"});
+    cookies.remove('username', {path: "/"});
+    cookies.remove('imageUrl',{path:"/"});
+    window.location.href="./login";
+  }
 
     return (
         <Container>
@@ -91,10 +140,10 @@ const Usuario = () => {
             </Container2>
             <Flex >
                 <Flex2>
-                    <img src="https://i.ibb.co/MNfqxSW/user.png" alt="" />
-                    <h5>Francisco Javier</h5>
-                    <p>francisco.javier@gmail.com</p>
-                    <a href="http://127.0.0.1:5500/Daily%20Bits/loading.html">Cerrar Sesión</a>
+                    <Img src={cookies.get('imageUrl')} alt="" />
+                    <h5>{cookies.get('nombre')} {cookies.get('apellidos')}</h5>
+                    <p>{cookies.get('username')}</p>
+                    <a  href="/login" onClick={()=>cerrarSesion()} >Cerrar Sesión</a>
                 </Flex2>
             </Flex>
         </Container>

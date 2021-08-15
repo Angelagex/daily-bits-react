@@ -4,6 +4,7 @@ import {  createGlobalStyle  } from 'styled-components';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import uuid from 'react-uuid'
+import { ProFileUpload } from '../../selectors/ProfileUpload'
 import Swal from 'sweetalert2'
 import '../../styles/Styles.css'
 
@@ -100,20 +101,21 @@ margin-left:6px;
 `;
 const url='https://apidaily.herokuapp.com/data';
 
-const Animacion = ({ users }) => {
+const AddUsers = ({ users }) => {
 
     const history = useHistory()
-    
+    let proFileUrl = []
     const [user, setUser] = useState({
         id: "",
         
         nombre: "",
         apellidos: "",
         username:"",
-        password:""
+        password:"",
+        imageUrl: ""
     })
 
-    const { id, nombre,apellidos,username, password} = user
+    const { id, nombre,apellidos,username, password,imageUrl} = user
     
 
     const handleInputChange = (e) => {
@@ -123,6 +125,23 @@ const Animacion = ({ users }) => {
             [e.target.name]: e.target.value
         })
     }
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        ProFileUpload(file).then(response => {
+            document.getElementById('imageUrl').value = response;
+            proFileUrl = response
+            console.log(response);
+        }).catch(error => {
+            console.log(error.message);
+        })
+    }
+
+    const handlePictureClick = () => {
+        document.querySelector('#fileProfile').click();
+    }
+
+
     const AddUser = async () => {
 
 
@@ -132,7 +151,9 @@ const Animacion = ({ users }) => {
                 nombre: nombre,
                 apellidos:apellidos,
                 username: username,
-                password:password
+                password:password,
+                imageUrl: proFileUrl
+                
             });
 
             if (resultado.status === 201) {
@@ -187,8 +208,28 @@ const Animacion = ({ users }) => {
             <LoginEmail type="text" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={handleInputChange}  required ></LoginEmail><br /><br /> </LoginFlex>
             <LoginFlex><LoginLabelP>Contaseña</LoginLabelP>
             <LoginEmail type="password" name="password" onChange={handleInputChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
+            <LoginFlex><LoginLabelP>Imagen de Perfil</LoginLabelP>
+                    <LoginEmail
+                        id="fileProfile"
+                        type="file"
+                        name="file"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+
+                        ></LoginEmail></LoginFlex>
+                        <LoginEmail
+                        type="button"
+                        
+                        onClick={handlePictureClick}
+                        value="Picture"
+                    /> 
+                    <LoginEmail  placeholder="Imagen de Perfil"
+                    name="imageUrl"
+                    id="imageUrl"
+                    value={imageUrl}
+                    onChange={handleInputChange} style={{ display: 'none' }}></LoginEmail>
             <LoginButton onClick={()=>AddUser()}> <LoginH1G>Registrar</LoginH1G></LoginButton><br />
-            <LoginRegistrar href="/" id="register">Regresar</LoginRegistrar></LoginFlex> 
+            <LoginRegistrar href="/login" id="register">Regresar</LoginRegistrar></LoginFlex> 
             <br />
             
         </LoginLabel></LoginLabel></LoginLabel>
@@ -197,4 +238,4 @@ const Animacion = ({ users }) => {
     )
 }
 
-export default Animacion
+export default AddUsers

@@ -145,7 +145,7 @@ await axios.get(url, {params:{username:this.state.form.username, password:this.s
             cookies.set('nombre',respuesta.nombre,{path:"/"});
             cookies.set('apellidos',respuesta.apellidos,{path:"/"});
             cookies.set('username',respuesta.username,{path:"/"});
-            
+            cookies.set('imageUrl',respuesta.imageUrl,{path:"/"});
             localStorage.setItem("isAuth", "true")
             Swal.fire(
                 'Has iniciado sesion',
@@ -156,13 +156,48 @@ await axios.get(url, {params:{username:this.state.form.username, password:this.s
             window.location.href="./";
             
         }else{
-            alert('El usuario o la contraseña es incorrecta');
+            Swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'Usuario o contraseña incorrecta'
+            })
         }
     }).catch(error=>{
      console.log(error);
  }) 
-console.log(this.state.value)
+
 }
+LoginUsuarios=async()=>{
+    await axios.get(url, {params:{username:this.state.form.username, password:this.state.form.password}}).then( response=>{ 
+        return  response.data;}).then(response=>{
+            if(response.length>0){
+                let respuesta=response[0];
+                cookies.set('id',respuesta.id,{path:"/"});
+                cookies.set('nombre',respuesta.nombre,{path:"/"});
+                cookies.set('apellidos',respuesta.apellidos,{path:"/"});
+                cookies.set('username',respuesta.username,{path:"/"});
+                cookies.set('imageUrl',respuesta.imageUrl,{path:"/"});
+                localStorage.setItem("isAuth", "true")
+                Swal.fire(
+                    'Has iniciado sesion',
+                    `Bienvenido ${respuesta.nombre}`,
+                    'success'
+                )
+                localStorage.setItem("isAuth", "si")
+                window.location.href="./usuarios";
+                
+            }else{
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error',
+                    text: 'Usuario o contraseña incorrecta'
+                })
+            }
+        }).catch(error=>{
+         console.log(error);
+     }) 
+    console.log(this.state.value)
+    }
 render(){
     return (
         <>
@@ -182,8 +217,10 @@ render(){
         
         </LoginFlex>
       
-       <LoginButton  onClick={()=>this.Login()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="icon" srcSet="" /> 
+       <LoginButton  onClick={()=>this.LoginUsuarios()}><img src="https://i.ibb.co/pWcj0z0/icon-google.png" alt="icon" srcSet="" /> 
        <LoginH1G>Continuar con Google</LoginH1G></LoginButton>
+      
+       
 
         <HrLogin />
         
@@ -193,7 +230,7 @@ render(){
 
             <LoginEmail type="text" name="username" id="username" placeholder="Ingrese su Correo Electrónico" value={this.state.username}  onChange={this.handleChange}  required ></LoginEmail><br /><br />
            
-            <LoginLabelP>Contaseña</LoginLabelP>
+            <LoginLabelP>Contraseña</LoginLabelP>
 
             <LoginEmail type="password" name="password" onChange={this.handleChange} id="password" value={this.state.password} placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
 

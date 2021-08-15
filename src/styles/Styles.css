@@ -1,43 +1,43 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito'); 
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 * {
   box-sizing: border-box;
 }
 
 :root {
-    --font-family: "Nunito";
-    --color-white: #FFFFFE;
-    --color-black: #16161A;
-    --color-primary: #7F5AF0;
-    --color-secundary: #A786DF;
-    --color-tertiary: #72757E;
-    --color-green: #2CB67D;
-    --color-gray: #94A1B2;
-    --color-purple: #6B47DC;
-    --color-neutral: #232E35;
-    --color-red: #EF4565;
+  --font-family: "Nunito";
+  --color-white: #fffffe;
+  --color-black: #16161a;
+  --color-primary: #7f5af0;
+  --color-secundary: #a786df;
+  --color-tertiary: #72757e;
+  --color-green: #2cb67d;
+  --color-gray: #94a1b2;
+  --color-purple: #6b47dc;
+  --color-neutral: #232e35;
+  --color-red: #ef4565;
 }
 
-
+body {
+  font-family: nunito;
+}
 .container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
-} 
+}
 .checkmark {
   position: absolute;
   right: 8px;
   height: 25px;
   width: 25px;
-  background-image:url("https://gejocad.github.io/DailyBits/img/radio-button.png");
+  background-image: url("https://gejocad.github.io/DailyBits/img/radio-button.png");
   border-radius: 50%;
 }
 
-
-
 /* When the radio button is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-image:url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
+  background-image: url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -49,5 +49,5 @@
 
 /* Show the indicator (dot/circle) when checked */
 .container input:checked ~ .checkmark:after {
-  background-image:url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
+  background-image: url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
 }
