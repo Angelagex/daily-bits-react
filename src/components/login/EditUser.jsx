@@ -71,7 +71,7 @@ color: #FFFFFE;
 }
 
 @media only screen and (max-width: 767px){
-    width:70%
+    width:70%;
     
     margin-left:90px;
 }
