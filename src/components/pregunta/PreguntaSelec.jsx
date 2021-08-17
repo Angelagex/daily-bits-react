@@ -38,6 +38,9 @@ const Preguntas = styled.a`
   margin-top: 15px; 
   padding-left: 15px;
   text-decoration: none;
+  &:focus-within {
+            border-color: green;
+        }
 `
 const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
 
@@ -54,6 +57,9 @@ const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
         margin-right: 1rem;
         background-size: cover;
         }
+
+
+
     `
 
     const Input = styled.input`
@@ -68,9 +74,10 @@ const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
     & {
         background-image: url("https://gejocad.github.io/DailyBits/img/radio-button.png");    
         }
+    
     ${Input}:checked + &{
         background-image: url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
-    }
+        }
     `
 
 
@@ -87,7 +94,7 @@ export default function PreguntaSelec()  {
                 <Preguntas>
                     <Container className="custom-radio-checkbox">Pregunta 1
                         <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
-                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
+                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio" tabIndex="1" />
                     </Container>
                 </Preguntas>
                 <Preguntas>
