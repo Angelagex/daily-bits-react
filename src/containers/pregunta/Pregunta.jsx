@@ -7,7 +7,7 @@ import ThemeContext, { themes } from "../../Context/theme";
 
 
 
-const Body = styled.body`
+const Body = styled.div`
 background-color: var(--color-black);
 color: var(--color-white);
 font-family: var(--font-family);  

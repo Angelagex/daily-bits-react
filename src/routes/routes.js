@@ -5,6 +5,7 @@ import Pregunta from "../containers/pregunta/Pregunta"
 import Perfil from "../containers/profile/Perfil"
 import Registro from "../containers/registro/Regsitro"
 import Usuarios from "../components/login/MostrarUser"
+import EditUsers from "../components/login/EditUser"
 
 
 const routes = {
@@ -29,11 +30,20 @@ const routes = {
         name: "profile",
         component: Perfil
     },
+
+
     {
         path: "/usuarios",
         name: "usuarios",
         component: Usuarios
     },
+    {
+      path: `/edit/:id`,
+      name: "edituser",
+      component: EditUsers
+  },
+
+
   ],
   public: [
     {

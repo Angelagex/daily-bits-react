@@ -59,13 +59,14 @@ const Container = styled.label`
     opacity: 0;
     cursor: pointer;
     `
-    const Span = styled.span`
+    const Checkmark = styled.span`
     position: absolute;
     right: 8px;
     height: 25px;
     width: 25px;
     background-image:url("https://gejocad.github.io/DailyBits/img/radio-button.png");
-    border-radius: 50%;   
+    border-radius: 50%;
+       
     `
 
 
@@ -80,21 +81,21 @@ export default function PreguntaSelec()  {
                     <PreguntaTexto>Prueba pregunta</PreguntaTexto>
                 </Pregunta>
                 <Preguntas>
-                    <Container>
-                        <Input/>Pregunta 1
-                        <Span/>
+                    <Container>Pregunta 1
+                        <Input/>
+                        <Checkmark/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                    <Container>
-                        <Input/>Pregunta 2
-                        <Span/>
+                    <Container>Pregunta 2
+                        <Input/>
+                        <Checkmark/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                    <Container>
-                        <Input/>Pregunta 3
-                        <Span/>
+                    <Container>Pregunta 3
+                        <Input/>
+                        <Checkmark/>
                     </Container>
                 </Preguntas>
             </ContenedorPrincipal>

@@ -7,9 +7,8 @@ import Swal from 'sweetalert2'
 import '../../styles/Styles.css'
 import { useHistory } from 'react-router-dom'
 import {useForm} from '../../hooks/useForm'
+import { ProFileUpload } from '../../selectors/ProfileUpload'
 import logologin from '../img/logologin.svg'
-
-
 const cookies= new Cookies();
 const GlobalStyle = createGlobalStyle`
   body {
@@ -31,7 +30,17 @@ const LoginForm= styled.form`
     padding-right: 4vw;
     padding-left: 4vw;
 `;
-
+const LoginImg= styled.input`
+height: 34px;
+    padding: 12px 19px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 12px;
+    cursor: pointer;
+`;
 const LoginButton=styled.button`
 background: #EF4565;
 display: flex;
@@ -72,7 +81,7 @@ color: #FFFFFE;
 }
 
 @media only screen and (max-width: 767px){
-    width:70%
+    width:70%;
     
     margin-left:90px;
 }
@@ -118,7 +127,17 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `
-
+const LoginLabelPImg= styled.label`
+ height: 34px;
+    padding: 6px 12px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    `
 const url='https://apidaily.herokuapp.com/data';
 const EditUsers = (props) => {
 
@@ -126,13 +145,13 @@ const EditUsers = (props) => {
     const apellidosRef = useRef('');
     const usernameRef = useRef('');
     const passwordRef = useRef('');
-
+    const imgUrlRef= useRef('');
 
     const history = useHistory()
     const [users, setUsers] = useState([])
     const [values, handleInputChange, reset] = useForm(users)
 
-   
+    let proFileUrl = []
 
     const { id, nombre,apellidos, username, password } = values
 
@@ -157,7 +176,8 @@ const EditUsers = (props) => {
         const nuevoUser = usernameRef.current.value,
             nuevoNombre = nombreRef.current.value,
             nuevoApellidos = apellidosRef.current.value,
-            nuevoPassword = passwordRef.current.value
+            nuevoPassword = passwordRef.current.value,
+            nuevaImg=imgUrlRef.current.value
 
         const editarUser = {
             id,
@@ -165,7 +185,8 @@ const EditUsers = (props) => {
              
             nombre:nuevoNombre, 
             apellidos:nuevoApellidos,
-            password:nuevoPassword
+            password:nuevoPassword,
+            imgUrl:nuevaImg
         }
 
         
@@ -198,11 +219,26 @@ const EditUsers = (props) => {
         e.preventDefault();
     }
     
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        ProFileUpload(file).then(response => {
+            document.getElementById('imageUrl').value = response;
+            proFileUrl = response
+            console.log(response);
+        }).catch(error => {
+            console.log(error.message);
+        })
+    }
+
+    const handlePictureClick = () => {
+        document.querySelector('#fileProfile').click();
+    }
     const cerrarSesion=()=>{
         cookies.remove('id', {path: "/"});
         cookies.remove('nombre', {path: "/"});
         cookies.remove('apellidos', {path: "/"});
         cookies.remove('username', {path: "/"});
+        localStorage.clear();
         window.location.href="./";
     }
     
@@ -215,7 +251,6 @@ const EditUsers = (props) => {
                 <figure>
                         <img src={logologin} id="logo" alt="" />
                     </figure>
-                    <LoginButton1 onClick={()=>cerrarSesion()} >Cerrar Sesion</LoginButton1>
                 <ButtonLoginH1>Editar Usuario</ButtonLoginH1>
             </LoginFlex>
            
@@ -233,10 +268,30 @@ const EditUsers = (props) => {
             <LoginLabel htmlFor="username">
                 <LoginLabelP>Nombre de Usuario </LoginLabelP>
                 <LoginEmail type="text" name="username" id="username" defaultValue={users.username} ref={usernameRef} onChange={handleInputChange}  required ></LoginEmail><br /><br />
-                <LoginLabelP>Contaseña</LoginLabelP>
-                <LoginEmail type="password" name="password" onChange={handleInputChange} ref={passwordRef} defaultValue={users.password} id="password"    required ></LoginEmail>
+                <LoginLabelP>Contraseña</LoginLabelP>
+                <LoginEmail type="password" name="password" onChange={handleInputChange} ref={passwordRef} defaultValue={users.password} id="password" ></LoginEmail><br /><br />
                 
              </LoginLabel>
+             <LoginFlex>
+                    <LoginEmail
+                        id="fileProfile"
+                        type="file"
+                        name="file"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+
+                        ></LoginEmail></LoginFlex>
+                        <LoginImg
+                        type="button"
+                        value="Selecciona una Imagen" 
+                        onClick={handlePictureClick}
+                       
+                    /> 
+                    <LoginEmail  placeholder="Imagen de Perfil"
+                    name="imageUrl"
+                    id="imageUrl"
+                    defaultValue={users.imageUrl}
+                    onChange={handleInputChange} style={{ display: 'none' }}></LoginEmail><br /><br />
              <LoginButton onClick={()=>editarUsuario()}> <LoginH1G>Editar</LoginH1G></LoginButton> </LoginFlex>
         </LoginForm>
             </>
