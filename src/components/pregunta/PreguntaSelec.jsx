@@ -55,7 +55,7 @@ const Preguntas = styled.a`
   padding-left: 15px;
   text-decoration: none;
   &:focus-within {
-            border-color: green;
+            border-color: var(--color-green);
         }
 `
 const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
