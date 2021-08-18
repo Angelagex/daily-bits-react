@@ -22,6 +22,22 @@ const Avatar = styled.img`
 const PreguntaTexto = styled.h1`
 border-width: 2px;
 `
+const PreguntaSelect = styled.div`
+ 
+        
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 13px;
+        cursor: pointer;
+        top: 12px;
+        letter-spacing: 0.005em;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+            `
 
 const Preguntas = styled.a`
     display: flex;
@@ -39,34 +55,46 @@ const Preguntas = styled.a`
   padding-left: 15px;
   text-decoration: none;
 `
-const Container = styled.label`
-    
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    margin-top: 13px;
-    cursor: pointer;
+const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
 
-    letter-spacing: 0.005em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;`
+
+
+
+    & > Input.custom-radio-checkbox__input {
+        display: none;
+        }
+
+    & > Span.custom-radio-checkbox__show {
+        display: inline-block;
+        margin-left: auto;
+        
+        width: 25px;
+        height: 25px;
+        margin-right: 1rem;
+        background-size: cover;
+        }
+    `
 
     const Input = styled.input`
-    position: absolute;
+     position: absolute;
     opacity: 0;
     cursor: pointer;
     `
-    const Checkmark = styled.span`
+    const Span = styled.span`
     position: absolute;
-    right: 8px;
+    top: 12px;
+    right: 8px; 
     height: 25px;
     width: 25px;
-    background-image:url("https://gejocad.github.io/DailyBits/img/radio-button.png");
-    border-radius: 50%;
-       
+    border-radius: 50%;   
+
+    & {
+        background-image: url("https://gejocad.github.io/DailyBits/img/radio-button.png");    
+        }
+    
+    ${Input}:checked + &{
+        background-image: url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
+        }
     `
 
 
@@ -81,25 +109,24 @@ export default function PreguntaSelec()  {
                     <PreguntaTexto>Prueba pregunta</PreguntaTexto>
                 </Pregunta>
                 <Preguntas>
-                    <Container>Pregunta 1
-                        <Input/>
-                        <Checkmark/>
+                    <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 1</PreguntaSelect>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
+                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                    <Container>Pregunta 2
-                        <Input/>
-                        <Checkmark/>
+                   <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 1</PreguntaSelect>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
+                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                    <Container>Pregunta 3
-                        <Input/>
-                        <Checkmark/>
+                    <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 3</PreguntaSelect>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
+                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
             </ContenedorPrincipal>
         );
     
 }
-

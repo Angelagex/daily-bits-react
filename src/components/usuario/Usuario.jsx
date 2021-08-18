@@ -1,18 +1,16 @@
-import React,{useState, useEffect} from 'react'
+import React,{ useEffect} from 'react'
 import styled from 'styled-components';
-import AddUsers from '../login/AddUser';
-import MostrarUser from '../login/MostrarUser';
+
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/Styles.css'
 const cookies= new Cookies();
 const Usuario = (props) => {
 
     const Container = styled.div`
+    
         padding-top: 5vw;
         padding-right: 4vw;
         padding-left: 4vw;
@@ -70,7 +68,7 @@ const Img =styled.img`
         margin-top: 4vh;
 
         &>h5 {
-            font-family: Inter;
+font-family: var(--font-family);  
             font-style: normal;
             font-weight: bold;
             font-size: 16px;
@@ -81,8 +79,9 @@ const Img =styled.img`
         }
 
         &>p {
-            font-family: Inter;
-            font-style: normal;
+            
+            
+font-family: var(--font-family);  
             font-weight: normal;
             font-size: 14px;
             line-height: 24px;
@@ -91,7 +90,8 @@ const Img =styled.img`
         }
 
         &>a {
-            font-family: Inter;
+            
+font-family: var(--font-family);  
             font-style: normal;
             font-weight: 600;
             font-size: 16px;
@@ -102,11 +102,11 @@ const Img =styled.img`
     `
     
   
-  const [user, setUser] = useState([])
+  
 
   useEffect(() => {
     userInfo()
-      .then(usuario => setUser(usuario))
+      
   }, [])
 
   const userInfo = async() => {

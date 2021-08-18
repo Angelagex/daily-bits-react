@@ -233,14 +233,7 @@ const EditUsers = (props) => {
     const handlePictureClick = () => {
         document.querySelector('#fileProfile').click();
     }
-    const cerrarSesion=()=>{
-        cookies.remove('id', {path: "/"});
-        cookies.remove('nombre', {path: "/"});
-        cookies.remove('apellidos', {path: "/"});
-        cookies.remove('username', {path: "/"});
-        localStorage.clear();
-        window.location.href="./";
-    }
+
     
       
         return (

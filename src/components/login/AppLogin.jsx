@@ -5,7 +5,7 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
 import logologin from '../img/logologin.svg'
-import '../../styles/Styles.css'
+import '../../styles/Styles.css';
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #16161A;
@@ -153,7 +153,7 @@ await axios.get(url, {params:{username:this.state.form.username, password:this.s
                 'success'
             )
             localStorage.setItem("isAuth", "si")
-            window.location.href="./";
+            window.location.href="./Profile";
             
         }else{
             Swal.fire({
@@ -184,7 +184,7 @@ LoginUsuarios=async()=>{
                     'success'
                 )
                 localStorage.setItem("isAuth", "si")
-                window.location.href="./usuarios";
+                window.location.href="./";
                 
             }else{
                 Swal.fire({

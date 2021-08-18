@@ -63,29 +63,6 @@ color: #FFFFFE;
     
 }
 `;
-const LoginButton1=styled.button`
-background: #EF4565;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 6px 18px;
-
-position: static;
-border-radius: 4px;
-margin-top: 1vh;
-text-decoration: none;
-color: #FFFFFE;
-&:hover{
-    background: #c2324c;
-}
-
-@media only screen and (max-width: 767px){
-    width:70%;
-    
-    margin-left:90px;
-}
-`;
 
 const ButtonLoginH1=styled.h1`
 
@@ -127,18 +104,8 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `
-const LoginLabelPImg= styled.label`
- height: 34px;
-    padding: 6px 12px;
-    border-radius: 17px;
-    background-color:#9875F3;
-    color: white;
-    width: 170px;
-    text-align: center;
-    line-height: 22px;
-    cursor: pointer;
-    `
-const url='https://apidaily.herokuapp.com/data';
+
+
 const EditUsers = (props) => {
 
     const nombreRef = useRef('');
@@ -149,11 +116,11 @@ const EditUsers = (props) => {
 
     const history = useHistory()
     const [users, setUsers] = useState([])
-    const [values, handleInputChange, reset] = useForm(users)
+    const [values, handleInputChange] = useForm(users)
 
     let proFileUrl = []
 
-    const { id, nombre,apellidos, username, password } = values
+    const { id} = values
 
     
 
@@ -213,7 +180,7 @@ const EditUsers = (props) => {
         }
         
         history.push('/');
-        window.location.href="./usuarios";
+        window.location.href="./Login";
     }
    const handlePreventE= e=>{
         e.preventDefault();
@@ -232,14 +199,6 @@ const EditUsers = (props) => {
 
     const handlePictureClick = () => {
         document.querySelector('#fileProfile').click();
-    }
-    const cerrarSesion=()=>{
-        cookies.remove('id', {path: "/"});
-        cookies.remove('nombre', {path: "/"});
-        cookies.remove('apellidos', {path: "/"});
-        cookies.remove('username', {path: "/"});
-        localStorage.clear();
-        window.location.href="./";
     }
     
       
