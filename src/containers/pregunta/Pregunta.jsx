@@ -21,6 +21,7 @@ display: flex;
 flex-direction: row;
 height: 20px;
 justify-content: space-between;
+margin-right: 80px;
 `
 
 

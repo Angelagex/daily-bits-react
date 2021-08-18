@@ -184,7 +184,7 @@ const AddUsers = ({ users }) => {
                     'El Usuario se creo correctamente',
                     'success'
                 )
-                history.push('/')
+                history.push('/login')
             }
         } catch (error) {
             console.log(error);

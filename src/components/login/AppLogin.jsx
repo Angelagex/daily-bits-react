@@ -1,6 +1,5 @@
 import React,{Component} from 'react'
-import styled from 'styled-components';
-import {  createGlobalStyle  } from 'styled-components';
+import styled, {  createGlobalStyle  }  from 'styled-components';
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
