@@ -30,7 +30,17 @@ const LoginForm= styled.form`
     padding-right: 4vw;
     padding-left: 4vw;
 `;
-
+const LoginImg= styled.input`
+height: 34px;
+    padding: 12px 19px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 12px;
+    cursor: pointer;
+`;
 const LoginButton=styled.button`
 background: #EF4565;
 display: flex;
@@ -117,7 +127,17 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `
-
+const LoginLabelPImg= styled.label`
+ height: 34px;
+    padding: 6px 12px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    `
 const url='https://apidaily.herokuapp.com/data';
 const EditUsers = (props) => {
 
@@ -249,10 +269,10 @@ const EditUsers = (props) => {
                 <LoginLabelP>Nombre de Usuario </LoginLabelP>
                 <LoginEmail type="text" name="username" id="username" defaultValue={users.username} ref={usernameRef} onChange={handleInputChange}  required ></LoginEmail><br /><br />
                 <LoginLabelP>Contraseña</LoginLabelP>
-                <LoginEmail type="password" name="password" onChange={handleInputChange} ref={passwordRef} defaultValue={users.password} id="password" ></LoginEmail>
+                <LoginEmail type="password" name="password" onChange={handleInputChange} ref={passwordRef} defaultValue={users.password} id="password" ></LoginEmail><br /><br />
                 
              </LoginLabel>
-             <LoginFlex><LoginLabelP>Imagen de Perfil</LoginLabelP>
+             <LoginFlex>
                     <LoginEmail
                         id="fileProfile"
                         type="file"
@@ -261,17 +281,17 @@ const EditUsers = (props) => {
                         onChange={handleFileChange}
 
                         ></LoginEmail></LoginFlex>
-                        <LoginEmail
+                        <LoginImg
                         type="button"
-                        
+                        value="Selecciona una Imagen" 
                         onClick={handlePictureClick}
-                        value="Picture"
+                       
                     /> 
                     <LoginEmail  placeholder="Imagen de Perfil"
                     name="imageUrl"
                     id="imageUrl"
                     defaultValue={users.imageUrl}
-                    onChange={handleInputChange} style={{ display: 'none' }}></LoginEmail>
+                    onChange={handleInputChange} style={{ display: 'none' }}></LoginEmail><br /><br />
              <LoginButton onClick={()=>editarUsuario()}> <LoginH1G>Editar</LoginH1G></LoginButton> </LoginFlex>
         </LoginForm>
             </>

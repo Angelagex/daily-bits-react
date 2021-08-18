@@ -104,9 +104,7 @@ border-collapse: collapse;
 width: 100%;`
 	
 
-const Image=styled.img`
-width:100px;
-`
+
 
 const Th=styled.th`
 padding:15px;
@@ -139,7 +137,11 @@ color: white;
 width:50%;
 `;
 
-
+const Img =styled.img`
+ width:100px;
+    height:100px;
+    border-radius:160px;
+    `
 
 
 const cookies= new Cookies();
@@ -248,7 +250,7 @@ return (
 				<Td>{users.username}</Td>
 			</Tr>
       <Tr><Th>Foto de Perfil: </Th>
-				<Td><Image
+				<Td><Img
                     
                     src={users.imageUrl}
                     

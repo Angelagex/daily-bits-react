@@ -30,7 +30,18 @@ const LoginForm= styled.form`
     padding-right: 4vw;
     padding-left: 4vw;
 `;
-
+const LoginImg= styled.input`
+ height: 34px;
+    padding: 6px 12px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    
+`;
 const LoginButton=styled.button`
 background: #EF4565;
 display: flex;
@@ -63,7 +74,18 @@ const ButtonLoginH1=styled.h1`
       
     
     `;
-
+const LoginLabelPImg= styled.label`
+ height: 34px;
+    padding: 6px 12px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    
+`; 
 const HrLogin=styled.hr`
 border: 1px solid #94A1B2;
 margin-top: 2vh;`;
@@ -208,27 +230,28 @@ const AddUsers = ({ users }) => {
             <LoginEmail type="text" name="username" id="username" placeholder="Ingrese Nombre de usuario"  onChange={handleInputChange}  required ></LoginEmail><br /><br /> </LoginFlex>
             <LoginFlex><LoginLabelP>Contaseña</LoginLabelP>
             <LoginEmail type="password" name="password" onChange={handleInputChange} id="password" placeholder="Ingrese su Contraseña"   required ></LoginEmail><br /><br />
-            <LoginFlex><LoginLabelP>Imagen de Perfil</LoginLabelP>
-                    <LoginEmail
+            <LoginFlex>
+                    <LoginImg
                         id="fileProfile"
                         type="file"
                         name="file"
                         style={{ display: 'none' }}
                         onChange={handleFileChange}
 
-                        ></LoginEmail></LoginFlex>
-                        <LoginEmail
+                        ></LoginImg></LoginFlex>
+                        <LoginImg
                         type="button"
-                        
+                       
                         onClick={handlePictureClick}
-                        value="Picture"
+                        value="Selecciona una Imagen" 
                     /> 
-                    <LoginEmail  placeholder="Imagen de Perfil"
+                    <LoginEmail  
                     name="imageUrl"
                     id="imageUrl"
                     value={imageUrl}
-                    onChange={handleInputChange} style={{ display: 'none' }}></LoginEmail>
-            <LoginButton onClick={()=>AddUser()}> <LoginH1G>Registrar</LoginH1G></LoginButton><br />
+                    onChange={handleInputChange} style={{ display: 'none' }}>
+                    </LoginEmail><br /><br />
+            <LoginButton onClick={()=>AddUser()} > <LoginH1G>Registrar</LoginH1G></LoginButton><br />
             <LoginRegistrar href="/login" id="register">Regresar</LoginRegistrar></LoginFlex> 
             <br />
             
