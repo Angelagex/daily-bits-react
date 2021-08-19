@@ -74,18 +74,7 @@ const ButtonLoginH1=styled.h1`
       
     
     `;
-const LoginLabelPImg= styled.label`
- height: 34px;
-    padding: 6px 12px;
-    border-radius: 17px;
-    background-color:#9875F3;
-    color: white;
-    width: 170px;
-    text-align: center;
-    line-height: 22px;
-    cursor: pointer;
-    
-`; 
+
 const HrLogin=styled.hr`
 border: 1px solid #94A1B2;
 margin-top: 2vh;`;

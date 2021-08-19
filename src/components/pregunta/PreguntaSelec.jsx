@@ -118,7 +118,7 @@ export default function PreguntaSelec()  {
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                   <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 1</PreguntaSelect>
+                   <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 2</PreguntaSelect>
                         <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
