@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { Component } from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 import '../../styles/Styles.css';
-import ThemeContext from "../../Context/theme";
+
+
 
 const ContenedorPrincipal = styled.div`
 
@@ -101,35 +103,77 @@ const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
     `
 
 
+const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663e95c7ff741884414/raw/71ea594519317104f500611611a9837148f5fcf0/preguntasSelecDB.json';
 
-export default function PreguntaSelec()  {
-    
-        const theme = useContext(ThemeContext);
+
+ class PreguntaSelec extends Component {
+    state = {
+        preguntas: [
+          {
+            id:  "",
+            avatar: "",
+            pregunta: "",
+            res1: "",
+            res2: "",
+            res3: "",
+            resCorrect: ""
+          }
+        ],
+        cuenta: 0
+      }
+
+      componentDidMount() {
+  
+        fetch(preguntasDB).then(res => res.json())
+          .then(res => {
+            this.setState({
+              preguntas: res.preguntas
+            }, this.activador);
+        });
+      }
+
+      activador = () => {
+        const { preguntas } = this.state;
+        
+        if(preguntas.length > 0) {
+          const cuenta = Math.floor(Math.random() * preguntas.length);
+          this.setState({
+            cuenta
+          })
+        }
+      }
+    render() {
+        const { preguntas, cuenta } = this.state;
+        const check = "0";
+        const pregunta = preguntas[cuenta];
+
         return (
-            <ContenedorPrincipal style={theme}>
-                <Pregunta>
-                    <Avatar src="https://i.ibb.co/Wcx3y78/avatar-1.png" alt="calcelar" border="0" />
-                    <PreguntaTexto>Prueba pregunta</PreguntaTexto>
+            <ContenedorPrincipal>
+                  <Pregunta>
+                    <Avatar src={pregunta.avatar} alt="calcelar" border="0" />
+                    <PreguntaTexto>{pregunta.pregunta}</PreguntaTexto>
                 </Pregunta>
                 <Preguntas>
-                    <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 1</PreguntaSelect>
+                    <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res1}</PreguntaSelect>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer" />
+                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
+                    </Container>
+                </Preguntas>
+                <Preguntas>
+                   <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res2}</PreguntaSelect>
                         <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                   <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 2</PreguntaSelect>
+                    <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res1}</PreguntaSelect>
                         <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
-                <Preguntas>
-                    <Container className="custom-radio-checkbox"><PreguntaSelect>Pregunta 3</PreguntaSelect>
-                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
-                        <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
-                    </Container>
-                </Preguntas>
-            </ContenedorPrincipal>
-        );
-    
+        </ContenedorPrincipal>
+        )
+    }
 }
+
+export default PreguntaSelec;
