@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {useState} from 'react';
 import styled from 'styled-components';
 import '../../styles/Styles.css';
 
@@ -155,7 +154,7 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
                 </Pregunta>
                 <Preguntas>
                     <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res1}</PreguntaSelect>
-                        <Input className="custom-radio-checkbox__input" type="radio" name="answer" />
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>

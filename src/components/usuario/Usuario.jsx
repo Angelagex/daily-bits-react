@@ -1,11 +1,9 @@
 import React,{ useEffect} from 'react'
 import styled from 'styled-components';
-
-
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import '../../styles/Styles.css';
 
-import '../../styles/Styles.css'
 const cookies= new Cookies();
 const Usuario = (props) => {
 
@@ -130,6 +128,7 @@ const cerrarSesion=()=>{
     cookies.remove('apellidos', {path: "/"});
     cookies.remove('username', {path: "/"});
     cookies.remove('imageUrl',{path:"/"});
+    localStorage.clear();
     window.location.href="./login";
   }
 
