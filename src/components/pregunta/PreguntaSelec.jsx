@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import '../../styles/Styles.css';
-import Comprobar from './Comprobar';
 
 
 
@@ -131,12 +130,6 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
       });
     }
   
-    
-
-    Comprobar(evenet){
-      (this.state.selectedOption)?console.log("funciona"):console.log("nofunciona");
-    }
-  
 
       componentDidMount() {
   
@@ -160,8 +153,12 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
       }
       formSubmit(event) {
         event.preventDefault();
-       const Prueba = this.state.selectedOption 
-       console.log(Prueba)
+        
+       let prueba = localStorage.getItem("comprobar")
+       let prueba2 = this.state.selectedOption
+       console.log(prueba)
+       console.log(prueba2)
+       if (prueba === prueba2){console.log("aprobado camarada")}else{console.log("sorry bb")}
       }
 
     render() {
@@ -169,9 +166,10 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
         const pregunta = preguntas[cuenta];
 
 
-      function comprobar(){
-        console.log(pregunta.resCorrect);
-        (this.state.resCorrect)?console.log("funciona"):console.log("nofunciona");
+      function comprobarT(){
+        const prueba = pregunta.resCorrect
+        localStorage.setItem("comprobar", prueba)
+        
         
       }
 
@@ -182,7 +180,7 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
                     <Avatar src={pregunta.avatar} alt="calcelar" border="0" />
                     <PreguntaTexto>{pregunta.pregunta}</PreguntaTexto>
                 </Pregunta>
-                <form onSubmit={this.formSubmit}>
+                <form onSubmit={this.formSubmit} onClick={comprobarT()}>
                 <Preguntas>
                     <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res1}</PreguntaSelect>
                         <Input className="custom-radio-checkbox__input" type="radio" name="answer" value={pregunta.res1} onChange={this.onValueChange}/>
@@ -204,7 +202,7 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
                 <div>
                 Selected option is : {this.state.selectedOption}
               </div>
-              <button className="btn btn-default" type="submit" onClick={comprobar()}>
+              <button className="btn btn-default" type="submit" >
                 Submit
               </button>
                 </form>
