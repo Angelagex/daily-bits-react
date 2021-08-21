@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import '../../styles/Styles.css';
+import Comprobar from './Comprobar';
 
 
 
@@ -106,20 +107,36 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
 
 
  class PreguntaSelec extends Component {
-    state = {
+
+  constructor() {
+    
+    super();
+    this.state = {
         preguntas: [
           {
             id:  "",
             avatar: "",
             pregunta: "",
-            res1: "",
-            res2: "",
-            res3: "",
             resCorrect: ""
           }
         ],
         cuenta: 0
       }
+      this.onValueChange = this.onValueChange.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
+  }
+    onValueChange(event) {
+      this.setState({ 
+        selectedOption: event.target.value
+      });
+    }
+  
+    
+
+    Comprobar(evenet){
+      (this.state.selectedOption)?console.log("funciona"):console.log("nofunciona");
+    }
+  
 
       componentDidMount() {
   
@@ -141,10 +158,24 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
           })
         }
       }
+      formSubmit(event) {
+        event.preventDefault();
+       const Perro = this.state.selectedOption 
+       console.log(Perro)
+      }
+
     render() {
         const { preguntas, cuenta } = this.state;
-        const check = "0";
         const pregunta = preguntas[cuenta];
+
+
+      function comprobar(){
+        console.log(this.state.Perro);
+        console.log(pregunta.resCorrect);
+        (this.Perro === this.state.resCorrect)?console.log("funciona"):console.log("nofunciona");
+        
+      }
+
 
         return (
             <ContenedorPrincipal>
@@ -152,24 +183,32 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
                     <Avatar src={pregunta.avatar} alt="calcelar" border="0" />
                     <PreguntaTexto>{pregunta.pregunta}</PreguntaTexto>
                 </Pregunta>
+                <form onSubmit={this.formSubmit}>
                 <Preguntas>
                     <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res1}</PreguntaSelect>
-                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer" value={pregunta.res1} onChange={this.onValueChange}/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
                    <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res2}</PreguntaSelect>
-                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer" value={pregunta.res2} onChange={this.onValueChange}/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
                 <Preguntas>
-                    <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res1}</PreguntaSelect>
-                        <Input className="custom-radio-checkbox__input" type="radio" name="answer"/>
+                    <Container className="custom-radio-checkbox"><PreguntaSelect>{pregunta.res3}</PreguntaSelect>
+                        <Input className="custom-radio-checkbox__input" type="radio" name="answer" value={pregunta.res3} onChange={this.onValueChange}/>
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
+                <div>
+                Selected option is : {this.state.selectedOption}
+              </div>
+              <button className="btn btn-default" type="submit" onClick={comprobar()}>
+                Submit
+              </button>
+                </form>
         </ContenedorPrincipal>
         )
     }
