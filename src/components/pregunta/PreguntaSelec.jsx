@@ -160,8 +160,8 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
       }
       formSubmit(event) {
         event.preventDefault();
-       const Perro = this.state.selectedOption 
-       console.log(Perro)
+       const Prueba = this.state.selectedOption 
+       console.log(Prueba)
       }
 
     render() {
@@ -170,9 +170,8 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
 
 
       function comprobar(){
-        console.log(this.state.Perro);
         console.log(pregunta.resCorrect);
-        (this.Perro === this.state.resCorrect)?console.log("funciona"):console.log("nofunciona");
+        (this.state.resCorrect)?console.log("funciona"):console.log("nofunciona");
         
       }
 
