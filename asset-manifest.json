@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/daily-bits-react/static/css/main.f941af9f.chunk.css",
-    "main.js": "/daily-bits-react/static/js/main.d187f358.chunk.js",
-    "main.js.map": "/daily-bits-react/static/js/main.d187f358.chunk.js.map",
+    "main.js": "/daily-bits-react/static/js/main.d0c58ea7.chunk.js",
+    "main.js.map": "/daily-bits-react/static/js/main.d0c58ea7.chunk.js.map",
     "runtime-main.js": "/daily-bits-react/static/js/runtime-main.6530d677.js",
     "runtime-main.js.map": "/daily-bits-react/static/js/runtime-main.6530d677.js.map",
-    "static/js/2.b63426b0.chunk.js": "/daily-bits-react/static/js/2.b63426b0.chunk.js",
-    "static/js/2.b63426b0.chunk.js.map": "/daily-bits-react/static/js/2.b63426b0.chunk.js.map",
+    "static/js/2.2a5d81e9.chunk.js": "/daily-bits-react/static/js/2.2a5d81e9.chunk.js",
+    "static/js/2.2a5d81e9.chunk.js.map": "/daily-bits-react/static/js/2.2a5d81e9.chunk.js.map",
     "index.html": "/daily-bits-react/index.html",
     "static/css/main.f941af9f.chunk.css.map": "/daily-bits-react/static/css/main.f941af9f.chunk.css.map",
-    "static/js/2.b63426b0.chunk.js.LICENSE.txt": "/daily-bits-react/static/js/2.b63426b0.chunk.js.LICENSE.txt",
+    "static/js/2.2a5d81e9.chunk.js.LICENSE.txt": "/daily-bits-react/static/js/2.2a5d81e9.chunk.js.LICENSE.txt",
     "static/media/logologin.216d9e25.svg": "/daily-bits-react/static/media/logologin.216d9e25.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6530d677.js",
-    "static/js/2.b63426b0.chunk.js",
+    "static/js/2.2a5d81e9.chunk.js",
     "static/css/main.f941af9f.chunk.css",
-    "static/js/main.d187f358.chunk.js"
+    "static/js/main.d0c58ea7.chunk.js"
   ]
 }
