@@ -2,14 +2,12 @@ import React,{useEffect, useRef, useState} from 'react'
 import styled from 'styled-components';
 import {  createGlobalStyle  } from 'styled-components';
 import axios from 'axios';
-import Cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
 import '../../styles/Styles.css'
 import { useHistory } from 'react-router-dom'
 import {useForm} from '../../hooks/useForm'
 import { ProFileUpload } from '../../selectors/ProfileUpload'
 import logologin from '../img/logologin.svg'
-const cookies= new Cookies();
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #16161A;
@@ -63,29 +61,6 @@ color: #FFFFFE;
     
 }
 `;
-const LoginButton1=styled.button`
-background: #EF4565;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 6px 18px;
-
-position: static;
-border-radius: 4px;
-margin-top: 1vh;
-text-decoration: none;
-color: #FFFFFE;
-&:hover{
-    background: #c2324c;
-}
-
-@media only screen and (max-width: 767px){
-    width:70%;
-    
-    margin-left:90px;
-}
-`;
 
 const ButtonLoginH1=styled.h1`
 
@@ -127,18 +102,7 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `
-const LoginLabelPImg= styled.label`
- height: 34px;
-    padding: 6px 12px;
-    border-radius: 17px;
-    background-color:#9875F3;
-    color: white;
-    width: 170px;
-    text-align: center;
-    line-height: 22px;
-    cursor: pointer;
-    `
-const url='https://apidaily.herokuapp.com/data';
+
 const EditUsers = (props) => {
 
     const nombreRef = useRef('');
@@ -149,18 +113,18 @@ const EditUsers = (props) => {
 
     const history = useHistory()
     const [users, setUsers] = useState([])
-    const [values, handleInputChange, reset] = useForm(users)
+    const [values, handleInputChange] = useForm(users)
 
-    let proFileUrl = []
 
-    const { id, nombre,apellidos, username, password } = values
+
+    const { id } = values
 
     
 
     useEffect(() => {
       userInfo()
         .then(users => setUsers(users))
-    },[])
+    })
 
   
     const userInfo = async () => {
@@ -223,7 +187,6 @@ const EditUsers = (props) => {
         const file = e.target.files[0];
         ProFileUpload(file).then(response => {
             document.getElementById('imageUrl').value = response;
-            proFileUrl = response
             console.log(response);
         }).catch(error => {
             console.log(error.message);

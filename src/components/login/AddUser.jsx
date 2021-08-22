@@ -110,7 +110,6 @@ font-size: 16px;
 text-align:center;
 margin-left:6px;
 `;
-const url='https://apidaily.herokuapp.com/data';
 
 const AddUsers = ({ users }) => {
 
@@ -126,7 +125,7 @@ const AddUsers = ({ users }) => {
         imageUrl: ""
     })
 
-    const { id, nombre,apellidos,username, password,imageUrl} = user
+    const {nombre,apellidos,username, password,imageUrl} = user
     
 
     const handleInputChange = (e) => {

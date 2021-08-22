@@ -1,15 +1,15 @@
-import React,{useEffect, useRef, useState} from 'react'
-import styled from 'styled-components';
-import {  createGlobalStyle  } from 'styled-components';
+import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import axios from 'axios';
-import Cookies from 'universal-cookie'
+import styled ,{createGlobalStyle} from 'styled-components';
 import Swal from 'sweetalert2'
-import '../../styles/Styles.css'
 import { useHistory } from 'react-router-dom'
-import {useForm} from '../../hooks/useForm'
-import { ProFileUpload } from '../../selectors/ProfileUpload'
-import logologin from '../img/logologin.svg'
-const cookies= new Cookies();
+import Cookies from 'universal-cookie';
+import '../../styles/Styles.css'
+
+
+
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #16161A;
@@ -22,33 +22,20 @@ const LoginFlex =styled.div`
     justify-content: center;
     align-items: center;
     color: #FFFFFE;
-
  
 `;
-const LoginForm= styled.form`
-    padding-top: 8vw;
-    padding-right: 4vw;
-    padding-left: 4vw;
-`;
-const LoginImg= styled.input`
-height: 34px;
-    padding: 12px 19px;
-    border-radius: 17px;
-    background-color:#9875F3;
-    color: white;
-    width: 170px;
-    text-align: center;
-    line-height: 12px;
-    cursor: pointer;
-`;
+
+
+
+
+
 const LoginButton=styled.button`
 background: #EF4565;
 display: flex;
-flex-direction: row;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 6px 18px;
-
 position: static;
 border-radius: 4px;
 margin-top: 1vh;
@@ -57,204 +44,207 @@ color: #FFFFFE;
 &:hover{
     background: #c2324c;
 }
-
 @media only screen and (max-width: 767px){
-    width:40%
-    
+    width: 20%
 }
 `;
-
-const ButtonLoginH1=styled.h1`
-
-    margin-top: 5vh;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 39px;
-      
-    
-    `;
-
-const HrLogin=styled.hr`
-border: 1px solid #94A1B2;
-margin-top: 2vh;`;
-
-
-const LoginLabel=styled.label`
-color: #FFFFFE;
-padding-left: 4vw;
-padding-right: 4vw;`;
-
-const LoginLabelP=styled.p`
-align-self: flex-start;
-    text-indent: 4vw;`;
-const LoginEmail=styled.input` 
-padding: 12px 16px;
+const LoginButton1=styled.button`
+background: #EF4565;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 6px 18px;
+position: relative;
 border-radius: 4px;
-position: static;
-
-font-size: 16px;
-line-height: 24px;
+margin-top: 1vh;
+text-decoration: none;
+color: #FFFFFE;
+&:hover{
+    background: #c2324c;
+}
 @media only screen and (max-width: 767px){
-    width:100%
-}`;
+    width: 100%
+}
+`;
+const LoginButton2=styled.button`
+background: #EF4565;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 6px 18px;
+position: static;
+border-radius: 4px;
+margin-top: 1vh;
+text-decoration: none;
+color: #FFFFFE;
+&:hover{
+    background: #c2324c;
+}
+@media only screen and (max-width: 767px){
+    width: 100%
+}
+`;
+const Table=styled.table`
+	text-align: left;
+border-collapse: collapse;
+width: 100%;`
+	
 
-const LoginH1G=styled.h2`
-font-size: 16px;
-text-align:center;
-margin-left:6px;
-`
 
 
+const Th=styled.th`
+padding: 20px;
+  &:hover{
+  	background-color: #369681;
+	color: white;}
+`;
+
+const Td=styled.td`
+padding: 20px;
+&:hover{
+  	background-color: #369681;
+	color: white;}
+`;
+
+const Thead=styled.thead`
+text-align:right;
+border-bottom: solid 5px #0F362D;
+color: white;
+margin-left:10px;
+`;
+	
+
+
+
+
+
+const cookies= new Cookies();
 const EditUsers = (props) => {
 
-    const nombreRef = useRef('');
-    const apellidosRef = useRef('');
-    const usernameRef = useRef('');
-    const passwordRef = useRef('');
-    const imgUrlRef= useRef('');
+  const history = useHistory()
+  const [user, setUser] = useState([])
 
-    const history = useHistory()
-    const [users, setUsers] = useState([])
-    const [values, handleInputChange] = useForm(users)
+  useEffect(() => {
+    userInfo()
+      .then(usuario => setUser(usuario))
+  }, [])
 
-    let proFileUrl = []
+  const userInfo = async() => {
+  const url = `https://apidaily.herokuapp.com/data`
+  const resp = await axios.get(url)
+  const data = await resp.data
+  console.log(data)
+  return data
+}
 
-    const { id} = values
+const eliminarUser= id => {
+  console.log('eliminando', id);
 
-    
+  // TODO: Eliminar los registros
+  Swal.fire({
+    title: '¿Estas Seguro?',
+    text: "Una vez eliminado un usuario no podras recuperarlo",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Eliminar',
+    cancelButtonText: 'Cancelar'
 
-    useEffect(() => {
-      userInfo()
-        .then(users => setUsers(users))
-    },[])
+  }).then(async (result) => {
+    if (result.value) {
+      try {
 
-  
-    const userInfo = async () => {
-      const url = `https://apidaily.herokuapp.com/data/${props.match.params.id}`
-      const res = await axios.get(url)
-      const data = await res.data
-      console.log("Editar",data)
-      return data
-    }
- 
-    const editarUsuario = async e => {
-        
-        const nuevoUser = usernameRef.current.value,
-            nuevoNombre = nombreRef.current.value,
-            nuevoApellidos = apellidosRef.current.value,
-            nuevoPassword = passwordRef.current.value,
-            nuevaImg=imgUrlRef.current.value
-
-        const editarUser = {
-            id,
-            username:nuevoUser, 
-             
-            nombre:nuevoNombre, 
-            apellidos:nuevoApellidos,
-            password:nuevoPassword,
-            imgUrl:nuevaImg
+        const url = `https://apidaily.herokuapp.com/data/${id}`;
+        const resultado = await axios.delete(url);
+        if (resultado.status === 200) {
+          Swal.fire(
+            'Eliminado!',
+            'El Usuario se ha eliminado',
+            'success'
+          )
+          history.push('/')
         }
-
-        
-        try {
-            const url = `https://apidaily.herokuapp.com/data/${props.match.params.id}`;
-            const resultado = await axios.put(url, editarUser);
-
-            if (resultado.status === 200) {
-                Swal.fire(
-                    'Usuario Editado',
-                    'El usuario se editó correctamente',
-                    'success'
-                )
-                
-            }
-            
-        } catch (error) {
-            console.log(error);
-            Swal.fire({
-                type: 'error',
-                title: 'Error',
-                text: 'Hubo un error, vuelve a intentarlo'
-            })
-        }
-        
-        history.push('/');
-        window.location.href="./Login";
-    }
-   const handlePreventE= e=>{
-        e.preventDefault();
-    }
-    
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        ProFileUpload(file).then(response => {
-            document.getElementById('imageUrl').value = response;
-            proFileUrl = response
-            console.log(response);
-        }).catch(error => {
-            console.log(error.message);
+      } catch (error) {
+        console.log(error);
+        Swal.fire({
+          type: 'error',
+          title: 'Error',
+          text: 'Hubo un error, vuelve a intentarlo'
         })
+      }
     }
+  })
+}
 
-    const handlePictureClick = () => {
-        document.querySelector('#fileProfile').click();
-    }
-    
-      
+
+const handleDelete = (id) => {
+  eliminarUser(id)
+}
+
+
+const cerrarSesion=()=>{
+  cookies.remove('id', {path: "/"});
+  cookies.remove('nombre', {path: "/"});
+  cookies.remove('apellidos', {path: "/"});
+  cookies.remove('username', {path: "/"});
+  window.location.href="./";
+}
+
+return (
+  <>
+  <GlobalStyle />
+  <LoginButton2 onClick={()=>cerrarSesion()} >Cerrar Sesion</LoginButton2>
+    {
+      user.map(users => {
         return (
-            <>
-            <GlobalStyle />
-          <LoginForm onSubmit={handlePreventE}>
-            <LoginFlex>
-                <figure>
-                        <img src={logologin} id="logo" alt="" />
-                    </figure>
-                <ButtonLoginH1>Editar Usuario</ButtonLoginH1>
-            </LoginFlex>
-           
-    
-            <HrLogin /> <LoginFlex>
-            <LoginLabel htmlFor="nombre">
-                <LoginLabelP>Nombre</LoginLabelP>
-                <LoginEmail type="text" name="nombre" id="nombre" defaultValue={users.nombre}  ref={nombreRef} onChange={handleInputChange}  required ></LoginEmail><br /><br /></LoginLabel>
-
-            <LoginLabel htmlFor="apellidos">
-                <LoginLabelP>Apellidos</LoginLabelP>
-                <LoginEmail type="text" name="apellidos" id="apellido" ref={apellidosRef} defaultValue={users.apellidos}  onChange={handleInputChange}  required ></LoginEmail><br /><br /></LoginLabel>
-                 
+          <LoginFlex key={users.id}>
+            <Table>
             
-            <LoginLabel htmlFor="username">
-                <LoginLabelP>Nombre de Usuario </LoginLabelP>
-                <LoginEmail type="text" name="username" id="username" defaultValue={users.username} ref={usernameRef} onChange={handleInputChange}  required ></LoginEmail><br /><br />
-                <LoginLabelP>Contraseña</LoginLabelP>
-                <LoginEmail type="password" name="password" onChange={handleInputChange} ref={passwordRef} defaultValue={users.password} id="password" ></LoginEmail><br /><br />
-                
-             </LoginLabel>
-             <LoginFlex>
-                    <LoginEmail
-                        id="fileProfile"
-                        type="file"
-                        name="file"
-                        style={{ display: 'none' }}
-                        onChange={handleFileChange}
+            
 
-                        ></LoginEmail></LoginFlex>
-                        <LoginImg
-                        type="button"
-                        value="Selecciona una Imagen" 
-                        onClick={handlePictureClick}
-                       
-                    /> 
-                    <LoginEmail  placeholder="Imagen de Perfil"
-                    name="imageUrl"
-                    id="imageUrl"
-                    defaultValue={users.imageUrl}
-                    onChange={handleInputChange} style={{ display: 'none' }}></LoginEmail><br /><br />
-             <LoginButton onClick={()=>editarUsuario()}> <LoginH1G>Editar</LoginH1G></LoginButton> </LoginFlex>
-        </LoginForm>
-            </>
+      <Thead>Datos del Usuario</Thead>
+			<tr><Th>Nombres: </Th>
+				<Td>{users.nombre}</Td>
+			</tr>
+			<tr><Th>Apellidos: </Th> 
+				<Td>{users.apellidos}</Td>
+			</tr>
+      <tr><Th>Nombre de Usuario: </Th>
+				<Td>{users.username}</Td>
+			</tr>
+      
+      
+             
+            </Table>
+            
+
+            <LoginButton 
+                onClick={() => handleDelete(users.id)}>
+                eliminar
+              </LoginButton> 
+              
+               
+           
+           
+
+              
+
+              <Link
+                to={`/edit/${users.id}`} 
+                
+              ><LoginButton1  >editar </LoginButton1></Link>
+
+            
+          </LoginFlex>
         )
+      })
     }
 
-    export default EditUsers
+  </>
+)
+}
+
+export default EditUsers
