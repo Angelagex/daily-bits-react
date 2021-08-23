@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import '../../styles/Styles.css'
-
+import PreguntaSelec from '../../components/pregunta/PreguntaSelec'
 
 const Contenedor = styled.div`
 position:absolute;
@@ -31,8 +31,8 @@ const Button = styled.button`
 
 
 
-const Comprobar = () => {
-
+const Comprobar = ({}) => {
+      
       return (
          
             <Contenedor>

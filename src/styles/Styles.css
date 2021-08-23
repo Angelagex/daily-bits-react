@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
-* {
-  box-sizing: border-box;
+body {
+  background-color: var(--color-black);
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  color: var(--color-white);
 }
 
 :root {
@@ -18,9 +21,6 @@
   --color-red: #ef4565;
 }
 
-body {
-  font-family: nunito;
-}
 .container input {
   position: absolute;
   opacity: 0;

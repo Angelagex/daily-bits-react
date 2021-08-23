@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch, 
   Route,
 } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import { PrivateRoute } from "./type.js";
 
 const Routes = () => {
   return (
-    <Router>
+    <Router basename ="/daily-bits-react">
         <Switch>
           {routes.private.map(({ path, component, name }) => (
             <PrivateRoute exact key={name} path={path} component={component} />

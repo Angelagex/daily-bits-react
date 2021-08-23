@@ -6,6 +6,7 @@ import Perfil from "../containers/profile/Perfil"
 import Registro from "../containers/registro/Regsitro"
 import Usuarios from "../components/login/MostrarUser"
 import EditUsers from "../components/login/EditUser"
+import PreguntaImg from "../components/pregunta/PreguntaImg"
 
 
 const routes = {
@@ -42,6 +43,11 @@ const routes = {
       name: "edituser",
       component: EditUsers
   },
+  {
+    path: `/preguntasimg`,
+    name: "preguntaimg",
+    component: PreguntaImg,
+},
 
 
   ],

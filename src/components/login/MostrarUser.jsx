@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from "react-router-dom";
+import React,{useEffect, useRef, useState} from 'react'
+import styled from 'styled-components';
+import {  createGlobalStyle  } from 'styled-components';
 import axios from 'axios';
-import styled ,{createGlobalStyle} from 'styled-components';
+import Cookies from 'universal-cookie'
 import Swal from 'sweetalert2'
-import { useHistory } from 'react-router-dom'
-import AddUsers from './AddUser';
-import Cookies from 'universal-cookie';
+import { useHistory, Link } from 'react-router-dom'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrash,faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/Styles.css'
-
-
-
+import {useForm} from '../../hooks/useForm'
+import { ProFileUpload } from '../../selectors/ProfileUpload'
+import logologin from '../img/logologin.svg'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const LoginFlex =styled.div`
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,55 +28,23 @@ const LoginFlex =styled.div`
 
  
 `;
-
-
-
-
-
+const LoginForm= styled.form`
+    padding-top: 8vw;
+    padding-right: 4vw;
+    padding-left: 4vw;
+`;
+const LoginImg= styled.input`
+height: 34px;
+    padding: 12px 19px;
+    border-radius: 17px;
+    background-color:#9875F3;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 12px;
+    cursor: pointer;
+`;
 const LoginButton=styled.button`
-background: #EF4565;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 6px 18px;
-
-position: static;
-border-radius: 4px;
-margin-top: 1vh;
-text-decoration: none;
-color: #FFFFFE;
-&:hover{
-    background: #c2324c;
-}
-
-@media only screen and (max-width: 767px){
-    width: 20%
-}
-`;
-const LoginButton1=styled.button`
-background: #EF4565;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 6px 18px;
-
-position: relative;
-
-border-radius: 4px;
-margin-top: 1vh;
-text-decoration: none;
-color: #FFFFFE;
-&:hover{
-    background: #c2324c;
-}
-
-@media only screen and (max-width: 767px){
-    width: 100%
-}
-`;
-const LoginButton2=styled.button`
 background: #EF4565;
 display: flex;
 flex-direction: row;
@@ -95,13 +62,58 @@ color: #FFFFFE;
 }
 
 @media only screen and (max-width: 767px){
-    width: 100%
+    width:40%
+    
 }
 `;
 const Table=styled.table`
 
 border-collapse: collapse;
 width: 100%;`
+	
+
+
+const ButtonLoginH1=styled.h1`
+
+    margin-top: 5vh;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+      
+    
+    `;
+
+const HrLogin=styled.hr`
+border: 1px solid #94A1B2;
+margin-top: 2vh;`;
+
+
+const LoginLabel=styled.label`
+color: #FFFFFE;
+padding-left: 4vw;
+padding-right: 4vw;`;
+
+const LoginLabelP=styled.p`
+align-self: flex-start;
+    text-indent: 4vw;`;
+const LoginEmail=styled.input` 
+padding: 12px 16px;
+border-radius: 4px;
+position: static;
+
+font-size: 16px;
+line-height: 24px;
+@media only screen and (max-width: 767px){
+    width:100%
+}`;
+
+const LoginH1G=styled.h2`
+font-size: 16px;
+text-align:center;
+margin-left:6px;
+`;
+
 	
 
 
@@ -142,6 +154,8 @@ const Img =styled.img`
     height:100px;
     border-radius:160px;
     `
+
+
 
 
 const cookies= new Cookies();

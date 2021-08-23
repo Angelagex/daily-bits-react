@@ -7,7 +7,7 @@ import ThemeContext, { themes } from "../../Context/theme";
 
 
 
-const Body = styled.body`
+const Body = styled.div`
 background-color: var(--color-black);
 color: var(--color-white);
 font-family: var(--font-family);  
@@ -21,6 +21,7 @@ display: flex;
 flex-direction: row;
 height: 20px;
 justify-content: space-between;
+margin-right: 80px;
 `
 
 
@@ -30,7 +31,7 @@ const Pregunta = () => {
         <ThemeContext.Provider value={themes}>
         <Body>
             <Div>
-            <SignosVitales/><Comprobar/>
+            <SignosVitales/>
             </Div>
             <PreguntaSelec/>
         </Body>
