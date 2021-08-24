@@ -51,10 +51,10 @@ const Navbar = () => {
         <NavItem to="/" id="homediv" onClick={() => HandlerFunction(0,2,4)}>
             <img src={btnStyle[0]} id="homebtn" alt="" />
         </NavItem>
-        <NavItem to="/metrics" id="metricsdiv" onClick={() => HandlerFunction(1,2,3)}>
+        <NavItem to="/metrics" id="metricsdiv" onClick={() => HandlerFunction(1,3,4)}>
             <img src={btnStyle[1]} id="metricsbtn" alt="" />
         </NavItem>
-        <NavItem to="/profile" id="perfildiv" onClick={() => HandlerFunction(1,3,4)}>
+        <NavItem to="/profile" id="perfildiv" onClick={() => HandlerFunction(1,3,5)}>
             <img src={btnStyle[2]} id="perfilbtn" alt="" />
         </NavItem>
     </Navbar>

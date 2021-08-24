@@ -1,7 +1,5 @@
 import React from 'react';
-import SignosVitales from '../../components/pregunta/SignosVitales';
-import Comprobar from '../../components/pregunta/Comprobar';
-import styled from 'styled-components';
+import SignosVitales from '../../components/pregunta/SignosVitales';import styled from 'styled-components';
 import PreguntaSelec from '../../components/pregunta/PreguntaSelec'
 import ThemeContext, { themes } from "../../Context/theme";
 
@@ -31,7 +29,7 @@ const Pregunta = () => {
         <ThemeContext.Provider value={themes}>
         <Body>
             <Div>
-            <SignosVitales/><Comprobar/>
+            <SignosVitales/>
             </Div>
             <PreguntaSelec/>
         </Body>

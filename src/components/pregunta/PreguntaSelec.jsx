@@ -21,7 +21,12 @@ const Avatar = styled.img`
 
 `
 const PreguntaTexto = styled.h1`
-border-width: 2px;
+  margin: 20px;
+    display: flex;
+    flex-direction: row;
+    
+    font-size: 25px;
+
 `
 const PreguntaSelect = styled.div`
  
@@ -100,6 +105,33 @@ const Container = styled.label.attrs((/* props */) => ({ tabIndex: 0 }))`
         background-image: url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
         }
     `
+    
+    
+const Contenedor = styled.div`
+position:absolute;
+  align-items: center;
+ justify-content: space-between;
+ align-content: center;
+ transform: translateX(60px);
+ bottom: 25px;
+ 
+`
+
+
+const Button = styled.button`
+
+
+  position:absolute;
+  width: 328px;
+  height: 50px; 
+  color: var(--color-white);
+  bottom: 16px;
+  margin-top: 20px;
+  background: #D4CAF3;
+  border-radius: 16px;
+
+`
+
 
 
 const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663e95c7ff741884414/raw/71ea594519317104f500611611a9837148f5fcf0/preguntasSelecDB.json';
@@ -126,8 +158,12 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
   }
     onValueChange(event) {
       this.setState({ 
+        btn: "",
+        
         selectedOption: event.target.value
       });
+
+      this.activarComprobar();
     }
   
 
@@ -137,11 +173,11 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
           .then(res => {
             this.setState({
               preguntas: res.preguntas
-            }, this.activador);
+            }, this.siguientePregunta);
         });
       }
 
-      activador = () => {
+      siguientePregunta = () => {
         const { preguntas } = this.state;
         
         if(preguntas.length > 0) {
@@ -151,16 +187,27 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
           })
         }
       }
+
+      activarComprobar = () => {
+        let button =  document.querySelector(".btn-active")
+        button.innerHTML = ''
+        button.innerHTML += `
+        <button id="run" type="submit" class="comprobar-active">COMPROBAR</button>
+      `
+      }
       
       formSubmit(event) {
         event.preventDefault();
         
-       let prueba = localStorage.getItem("comprobar")
-       let prueba2 = this.state.selectedOption
-       console.log(prueba)
-       console.log(prueba2)
-       if (prueba === prueba2){console.log("aprobado camarada")}else{console.log("sorry bb")}
+       let resCorrect = localStorage.getItem("resCorrect")
+       let resSelect = this.state.selectedOption
+       console.log(resCorrect)
+       console.log(resSelect)
+       if (resCorrect === resSelect){console.log("respuesta correcta")}else{console.log("respuesta incorrecta")}
+
+       
       }
+      
 
     render() {
         const { preguntas, cuenta } = this.state;
@@ -168,8 +215,8 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
 
 
       function comprobarT(){
-        const prueba = pregunta.resCorrect
-        localStorage.setItem("comprobar", prueba)
+        const resCorrect = pregunta.resCorrect
+        localStorage.setItem("resCorrect", resCorrect)
         
         
       }
@@ -200,14 +247,12 @@ const preguntasDB = 'https://gist.githubusercontent.com/gejocad/b07d390e21f55663
                         <Span className="custom-radio-checkbox__show custom-radio-checkbox__show--radio"/>
                     </Container>
                 </Preguntas>
-                <div>
-                Selected option is : {this.state.selectedOption}
-              </div>
-              <button className="btn btn-default" type="submit" >
-                Submit
-              </button>
-                </form>
+                <Contenedor>
+                <Button className="btn-active" type="submit">COMPROBAR</Button>
+            </Contenedor>
+            </form>
         </ContenedorPrincipal>
+        
         )
     }
 }

@@ -55,3 +55,17 @@ body {
   .container input:checked ~ .checkmark:after {
     background-image:url("https://gejocad.github.io/DailyBits/img/radio-button-active.png");
   }
+
+  .comprobar-active{
+    position:absolute;
+    width: 328px;
+    height: 50px; 
+    color: var(--color-white);
+    transform: translateX(-164px);
+    transform: translateY();
+    bottom: -1px;
+    margin-top: 20px;
+    background: var(--color-purple);
+    border-radius: 16px;
+   }
+  
