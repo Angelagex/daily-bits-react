@@ -89,7 +89,11 @@ const Section = styled.div`
     
 `
 
+let preguntas = localStorage.getItem('tPreguntas')
+ 
+let correctas = localStorage.getItem('correctas')
 
+let incorrectas = localStorage.getItem('incorrectas')
 
     return (
         <Container>
@@ -106,17 +110,17 @@ const Section = styled.div`
                 <Section class="flex2"> 
                     <img src="media/respuestas.svg" alt="" />
                     <p>Respuestas contestadas</p>
-                    <input type="number readonly" value="40" id="totalcontestadas" />
+                    <input type="number readonly" value={preguntas} id="totalcontestadas" />
                 </Section>
                 <Section class="flex2"> 
                     <img src="media/respuestas.svg" alt="" />
                     <p>Respuestas correctas</p>
-                    <input type="number readonly" value="20" id="respuestascorrectas" />
+                    <input type="number readonly" value={correctas} id="respuestascorrectas" />
                 </Section>
                 <Section class="flex2"> 
                     <img src="media/respuestas.svg" alt="" />
                     <p>Respuestas incorrectas</p>
-                    <input type="number readonly" value="20" id="respuestasincorrectas" />
+                    <input type="number readonly" value={incorrectas} id="respuestasincorrectas" />
                 </Section>
             </Subcontainer>
         </Container>

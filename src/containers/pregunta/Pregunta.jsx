@@ -12,6 +12,7 @@ font-family: var(--font-family);
 display: flex;
 flex-direction:column;
 align-items: center;
+width:auto;
 
 `
 const Div = styled.div`

@@ -4,6 +4,26 @@ import '../../styles/Styles.css';
 import { Link } from 'react-router-dom';
 
 
+const Container = styled.div`
+box-sizing: border-box;
+display: flex;
+flex-direction: row;
+width: auto;
+
+progress[value] {
+  appearance: none;
+  ::-webkit-progress-bar {
+    height: 10px;
+    width: 240px;
+    border-radius: 20px;
+    background: #eee;
+  }
+  ::-webkit-progress-value {
+    height: 10px;
+    border-radius: 20px;
+    background: var(--color-green);
+  }
+}`
 
 
 const Barra = styled.div`
@@ -16,7 +36,7 @@ justify-content: space-between;
 `
 const ContCancel = styled(Link)`
 
-margin: 15px;
+margin-top: 10px;
 color: var(--color-white);
 `
 
@@ -26,28 +46,35 @@ display: flex;
 flex-direction: row;  
 width: 15px;
 height: 20px;
-margin: 15px;
+margin: 10px;
+transform:translateX(65px);
 color: var(--color-white);
 `
 
 
-
+ 
 
 const SignosVitales = () => {
 
-      return (
-          <>
+ let barras = localStorage.getItem('barras')
+ 
+ let vidas = localStorage.getItem('vidas')
+
+  return (
+    
+      <Container>
           <ContCancel to="/">
               <img src="https://i.ibb.co/X3wnbvp/calcelar.png" alt="calcelar" border="0" />
             </ContCancel>
             <Barra>
-              <img src="https://i.ibb.co/BVXNy8s/Progress-4.png" alt="Progress" border="0" />
+              <progress value={barras} max="10"  alt="Progress" border="0" />
             </Barra>
             <ContVida>
-            <img src="https://i.ibb.co/pZhJP23/corazon.png" alt="corazon"/>4
+            <img src="https://i.ibb.co/pZhJP23/corazon.png" alt="corazon"/>{vidas}
             </ContVida>
-          </>
-      )
-  
-}
-export default SignosVitales
+          
+          </Container>
+  );
+};
+ 
+export default SignosVitales;

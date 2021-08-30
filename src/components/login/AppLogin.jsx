@@ -183,6 +183,11 @@ LoginUsuarios=async()=>{
                     'success'
                 )
                 localStorage.setItem("isAuth", "si")
+                localStorage.setItem("vidas", 4)
+                localStorage.setItem("barras", 0)
+                localStorage.setItem("tPreguntas", 0)
+                localStorage.setItem("correctas", 0)
+                localStorage.setItem("incorrectas", 0)
                 window.location.href="./";
                 
             }else{
